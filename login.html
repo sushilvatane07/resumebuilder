@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ResumeIt - Login</title>
+
+    <style>
+
+        /* ===============================
+           COLOR PALETTE
+        =============================== */
+
+        :root {
+            --bg: #111111;
+            --surface: #181818;
+            --surface-light: #202020;
+            --text: #f5f5f5;
+            --text-muted: #999999;
+            --border: #303030;
+            --input-bg: #121212;
+            --button: #f5f5f5;
+            --button-text: #111111;
+        }
+
+
+        /* ===============================
+           RESET
+        =============================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+
+        /* ===============================
+           NAVBAR
+        =============================== */
+
+        .navbar {
+            width: 100%;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 18px 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .logo-box {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+            border-radius: 6px;
+
+            background: var(--surface);
+        }
+
+        .back-link {
+            color: var(--text-muted);
+            font-size: 12px;
+
+            transition: 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+
+        /* ===============================
+           LOGIN PAGE
+        =============================== */
+
+        .login-page {
+            flex: 1;
+
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 70px 30px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 1050px;
+
+            display: grid;
+            grid-template-columns: 1fr 430px;
+
+            gap: 100px;
+
+            align-items: center;
+        }
+
+
+        /* ===============================
+           LEFT SIDE
+        =============================== */
+
+        .login-info {
+            max-width: 520px;
+        }
+
+        .eyebrow {
+            color: var(--text-muted);
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 18px;
+        }
+
+        .login-info h1 {
+            font-size: clamp(42px, 5vw, 62px);
+
+            line-height: 1.05;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 25px;
+        }
+
+        .login-info h1 span {
+            display: block;
+            color: var(--text-muted);
+        }
+
+        .info-text {
+            max-width: 470px;
+
+            color: var(--text-muted);
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+
+        /* ===============================
+           FEATURES
+        =============================== */
+
+        .login-features {
+            margin-top: 40px;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 22px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+            border-radius: 6px;
+
+            background: var(--surface);
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .feature-item h3 {
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .feature-item p {
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+
+
+        /* ===============================
+           LOGIN CARD
+        =============================== */
+
+        .login-card {
+            width: 100%;
+
+            padding: 38px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+        }
+
+        .form-header h2 {
+            font-size: 25px;
+            margin-bottom: 7px;
+        }
+
+        .form-header p {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+
+        /* ===============================
+           INPUTS
+        =============================== */
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .input-group > input {
+            width: 100%;
+            height: 45px;
+
+            padding: 0 13px;
+
+            background: var(--input-bg);
+
+            border: 1px solid var(--border);
+
+            border-radius: 5px;
+
+            outline: none;
+
+            color: var(--text);
+
+            font-size: 12px;
+        }
+
+        .input-group > input:focus {
+            border-color: #666666;
+        }
+
+        .input-group input::placeholder {
+            color: #666666;
+        }
+
+
+        /* ===============================
+           PASSWORD
+        =============================== */
+
+        .password-wrapper {
+            width: 100%;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+
+            background: var(--input-bg);
+
+            border: 1px solid var(--border);
+
+            border-radius: 5px;
+        }
+
+        .password-wrapper:focus-within {
+            border-color: #666666;
+        }
+
+        .password-wrapper input {
+            flex: 1;
+
+            width: 100%;
+            height: 100%;
+
+            padding: 0 13px;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            color: var(--text);
+
+            font-size: 12px;
+        }
+
+        .password-wrapper input::placeholder {
+            color: #666666;
+        }
+
+        .show-btn {
+            height: 100%;
+
+            padding: 0 13px;
+
+            border: none;
+
+            background: transparent;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+            cursor: pointer;
+        }
+
+        .show-btn:hover {
+            color: var(--text);
+        }
+
+
+        /* ===============================
+           LOGIN BUTTON
+        =============================== */
+
+        .login-btn {
+            width: 100%;
+            height: 45px;
+
+            border: none;
+
+            border-radius: 5px;
+
+            background: var(--button);
+
+            color: var(--button-text);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .login-btn:hover {
+            background: #dddddd;
+        }
+
+
+        /* ===============================
+           DIVIDER
+        =============================== */
+
+        .divider {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 23px 0;
+
+            color: #666666;
+
+            font-size: 9px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: var(--border);
+        }
+
+
+        /* ===============================
+           MAGIC LINK
+        =============================== */
+
+        .magic-link-btn {
+            width: 100%;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 5px;
+
+            background: transparent;
+
+            color: var(--text);
+
+            font-size: 11px;
+
+            cursor: pointer;
+        }
+
+        .magic-link-btn:hover {
+            background: var(--surface-light);
+        }
+
+        .mail-icon {
+            font-size: 14px;
+        }
+
+
+        /* ===============================
+           REGISTER LINK
+        =============================== */
+
+        .register-text {
+            margin-top: 25px;
+
+            text-align: center;
+
+            font-size: 11px;
+
+            color: var(--text-muted);
+        }
+
+        .register-text a {
+            margin-left: 4px;
+
+            color: var(--text);
+
+            font-weight: 600;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ===============================
+           FOOTER
+        =============================== */
+
+        .footer {
+            width: 100%;
+
+            border-top: 1px solid var(--border);
+
+            padding: 22px 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .footer p {
+            color: #666666;
+            font-size: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--text);
+        }
+
+
+        /* ===============================
+           TABLET
+        =============================== */
+
+        @media (max-width: 900px) {
+
+            .login-container {
+                grid-template-columns: 1fr;
+
+                max-width: 500px;
+
+                gap: 45px;
+            }
+
+            .login-info {
+                text-align: center;
+
+                max-width: 600px;
+
+                margin: auto;
+            }
+
+            .info-text {
+                margin: auto;
+            }
+
+            .login-features {
+                text-align: left;
+
+                max-width: 400px;
+
+                margin: 35px auto 0;
+            }
+        }
+
+
+        /* ===============================
+           MOBILE
+        =============================== */
+
+        @media (max-width: 600px) {
+
+            .nav-container {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+
+            .logo-box {
+                width: 31px;
+                height: 31px;
+            }
+
+            .back-link {
+                font-size: 10px;
+            }
+
+            .login-page {
+                padding: 45px 18px;
+
+                align-items: flex-start;
+            }
+
+            .login-container {
+                gap: 35px;
+            }
+
+            .login-info h1 {
+                font-size: 38px;
+
+                letter-spacing: -1.5px;
+            }
+
+            .info-text {
+                font-size: 13px;
+            }
+
+            .login-features {
+                margin-top: 30px;
+            }
+
+            .login-card {
+                padding: 28px 20px;
+            }
+
+            .form-header h2 {
+                font-size: 23px;
+            }
+
+            .footer {
+                padding: 20px;
+
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 15px;
+            }
+        }
+
+
+        /* ===============================
+           SMALL MOBILE
+        =============================== */
+
+        @media (max-width: 380px) {
+
+            .login-info h1 {
+                font-size: 33px;
+            }
+
+            .login-card {
+                padding: 24px 17px;
+            }
+
+            .feature-item h3 {
+                font-size: 12px;
+            }
+
+            .feature-item p {
+                font-size: 10px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+
+                <span class="logo-box">R</span>
+
+                <span>ResumeIt</span>
+
+            </a>
+
+
+            <a href="index.html" class="back-link">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= LOGIN PAGE ================= -->
+
+    <main class="login-page">
+
+        <div class="login-container">
+
+
+            <!-- LEFT SIDE -->
+
+            <div class="login-info">
+
+                <p class="eyebrow">
+                    WELCOME BACK
+                </p>
+
+
+                <h1>
+
+                    Build a resume
+
+                    <span>
+                        you're proud of.
+                    </span>
+
+                </h1>
+
+
+                <p class="info-text">
+
+                    Sign in to continue creating and managing
+                    your professional resume with ResumeIt.
+
+                </p>
+
+
+                <div class="login-features">
+
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+                            CV
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Professional Templates
+                            </h3>
+
+                            <p>
+                                Choose a clean resume template.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+                            PDF
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Download as PDF
+                            </h3>
+
+                            <p>
+                                Create and download your resume.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Simple & Easy
+                            </h3>
+
+                            <p>
+                                Create your resume in a few steps.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= LOGIN FORM ================= -->
+
+            <div class="login-card">
+
+                <div class="form-header">
+
+                    <h2>
+                        Welcome back
+                    </h2>
+
+                    <p>
+                        Login to your ResumeIt account.
+                    </p>
+
+                </div>
+
+
+                <form id="loginForm">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Enter your password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                id="togglePassword"
+                                class="show-btn"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOGIN -->
+
+                    <button
+                        type="submit"
+                        class="login-btn"
+                    >
+                        Login
+                    </button>
+
+
+                    <!-- DIVIDER -->
+
+                    <div class="divider">
+
+                        <span>OR</span>
+
+                    </div>
+
+
+                    <!-- MAGIC LINK -->
+
+                    <button
+                        type="button"
+                        class="magic-link-btn"
+                        id="magicLinkBtn"
+                    >
+
+                        <span class="mail-icon">
+                            ✉
+                        </span>
+
+                        Continue with Magic Link
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- REGISTER -->
+
+                <div class="register-text">
+
+                    Don't have an account?
+
+                    <a href="register.html">
+                        Create account
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 ResumeIt. All rights reserved.
+        </p>
+
+
+        <div class="footer-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#features">
+                Features
+            </a>
+
+            <a href="index.html#about">
+                About
+            </a>
+
+            <a href="index.html#contact">
+                Contact
+            </a>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* Show / Hide Password */
+
+        const password =
+            document.getElementById("password");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                if (password.type === "password") {
+
+                    password.type = "text";
+
+                    togglePassword.textContent = "Hide";
+
+                } else {
+
+                    password.type = "password";
+
+                    togglePassword.textContent = "Show";
+
+                }
+
+            }
+        );
+
+
+        /* Login */
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+
+        loginForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+                const email =
+                    document.getElementById("email")
+                    .value
+                    .trim();
+
+                const passwordValue =
+                    document.getElementById("password")
+                    .value;
+
+
+                if (
+                    email === "" ||
+                    passwordValue === ""
+                ) {
+
+                    alert(
+                        "Please fill in all fields."
+                    );
+
+                    return;
+
+                }
+
+
+                /*
+                    Backend authentication
+                    will be connected here.
+                */
+
+                alert("Login successful!");
+
+                // Later:
+                // window.location.href =
+                // "dashboard.html";
+
+            }
+        );
+
+
+        /* Magic Link */
+
+        const magicLinkBtn =
+            document.getElementById("magicLinkBtn");
+
+
+        magicLinkBtn.addEventListener(
+            "click",
+            function () {
+
+                const email =
+                    document.getElementById("email")
+                    .value
+                    .trim();
+
+
+                if (email === "") {
+
+                    alert(
+                        "Please enter your email first."
+                    );
+
+                    document
+                        .getElementById("email")
+                        .focus();
+
+                    return;
+
+                }
+
+
+                alert(
+                    "Magic link will be sent to " +
+                    email
+                );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

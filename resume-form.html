@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ResumeIt - Create Resume</title>
+
+
+    <style>
+
+        /* =====================================
+           COLOR VARIABLES
+        ===================================== */
+
+        :root {
+
+            --bg: #111111;
+            --surface: #181818;
+            --surface-light: #202020;
+
+            --text: #f5f5f5;
+            --text-muted: #999999;
+
+            --border: #303030;
+
+            --input-bg: #121212;
+
+            --button: #f5f5f5;
+            --button-text: #111111;
+
+            --resume-bg: #ffffff;
+            --resume-text: #222222;
+            --resume-muted: #666666;
+
+        }
+
+
+        /* =====================================
+           RESET
+        ===================================== */
+
+        * {
+
+            margin: 0;
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+        }
+
+
+        a {
+
+            color: inherit;
+
+            text-decoration: none;
+
+        }
+
+
+        button,
+        input,
+        textarea,
+        select {
+
+            font-family: inherit;
+
+        }
+
+
+        /* =====================================
+           NAVBAR
+        ===================================== */
+
+        .navbar {
+
+            height: 70px;
+
+            border-bottom: 1px solid var(--border);
+
+            background: var(--bg);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 30px;
+
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+        }
+
+
+        .logo-box {
+
+            width: 35px;
+
+            height: 35px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 6px;
+
+            background: var(--surface);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .nav-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+
+        }
+
+
+        .nav-link {
+
+            color: var(--text-muted);
+
+            font-size: 12px;
+
+        }
+
+
+        .nav-link:hover {
+
+            color: var(--text);
+
+        }
+
+
+        .download-btn {
+
+            border: none;
+
+            background: var(--button);
+
+            color: var(--button-text);
+
+            padding: 11px 18px;
+
+            border-radius: 5px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .download-btn:hover {
+
+            background: #dddddd;
+
+        }
+
+
+        /* =====================================
+           PAGE HEADER
+        ===================================== */
+
+        .page-header {
+
+            padding: 25px 30px;
+
+            border-bottom: 1px solid var(--border);
+
+        }
+
+
+        .page-header h1 {
+
+            font-size: 24px;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .page-header p {
+
+            color: var(--text-muted);
+
+            font-size: 12px;
+
+        }
+
+
+        /* =====================================
+           MAIN BUILDER
+           50% LEFT + 50% RIGHT
+        ===================================== */
+
+        .builder {
+
+            width: 100%;
+
+            min-height: calc(100vh - 140px);
+
+            display: grid;
+
+            grid-template-columns: 50% 50%;
+
+        }
+
+
+        /* =====================================
+           LEFT FORM SECTION
+        ===================================== */
+
+        .form-section {
+
+            padding: 30px;
+
+            border-right: 1px solid var(--border);
+
+            background: var(--bg);
+
+        }
+
+
+        .section-title {
+
+            font-size: 16px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .section-description {
+
+            color: var(--text-muted);
+
+            font-size: 11px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        /* =====================================
+           FORM CARD
+        ===================================== */
+
+        .form-card {
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 7px;
+
+            padding: 22px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .form-card h2 {
+
+            font-size: 14px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        /* =====================================
+           INPUT GROUP
+        ===================================== */
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+        }
+
+
+        .input-group {
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .input-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+        }
+
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+
+            width: 100%;
+
+            background: var(--input-bg);
+
+            border: 1px solid var(--border);
+
+            border-radius: 5px;
+
+            color: var(--text);
+
+            outline: none;
+
+            font-size: 11px;
+
+            padding: 11px;
+
+        }
+
+
+        .input-group input {
+
+            height: 42px;
+
+        }
+
+
+        .input-group textarea {
+
+            min-height: 90px;
+
+            resize: vertical;
+
+        }
+
+
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+
+            border-color: #666666;
+
+        }
+
+
+        .input-group input::placeholder,
+        .input-group textarea::placeholder {
+
+            color: #666666;
+
+        }
+
+
+        /* =====================================
+           SAVE BUTTON
+        ===================================== */
+
+        .save-btn {
+
+            width: 100%;
+
+            height: 44px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 5px;
+
+            background: var(--surface-light);
+
+            color: var(--text);
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .save-btn:hover {
+
+            background: #292929;
+
+        }
+
+
+        /* =====================================
+           RIGHT PREVIEW SECTION
+        ===================================== */
+
+        .preview-section {
+
+            background: #0d0d0d;
+
+            padding: 30px;
+
+            overflow: auto;
+
+        }
+
+
+        .preview-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .preview-header h2 {
+
+            font-size: 16px;
+
+        }
+
+
+        .preview-header span {
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+        }
+
+
+        /* =====================================
+           RESUME PAPER
+        ===================================== */
+
+        .resume-paper {
+
+            width: 100%;
+
+            max-width: 700px;
+
+            min-height: 900px;
+
+            margin: 0 auto;
+
+            padding: 50px;
+
+            background: var(--resume-bg);
+
+            color: var(--resume-text);
+
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+
+        }
+
+
+        /* =====================================
+           RESUME HEADER
+        ===================================== */
+
+        .resume-header {
+
+            padding-bottom: 20px;
+
+            border-bottom: 2px solid #222222;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .resume-name {
+
+            font-size: 30px;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .resume-job {
+
+            font-size: 13px;
+
+            color: var(--resume-muted);
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .resume-contact {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+
+            font-size: 9px;
+
+            color: var(--resume-muted);
+
+        }
+
+
+        /* =====================================
+           RESUME SECTIONS
+        ===================================== */
+
+        .resume-section {
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .resume-section h2 {
+
+            font-size: 12px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 10px;
+
+            padding-bottom: 5px;
+
+            border-bottom: 1px solid #dddddd;
+
+        }
+
+
+        .resume-section p {
+
+            font-size: 10px;
+
+            line-height: 1.7;
+
+            color: #444444;
+
+        }
+
+
+        /* =====================================
+           EDUCATION / EXPERIENCE
+        ===================================== */
+
+        .resume-item {
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .resume-item h3 {
+
+            font-size: 11px;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .resume-item .company {
+
+            font-size: 10px;
+
+            color: var(--resume-muted);
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .resume-item .date {
+
+            font-size: 9px;
+
+            color: #888888;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        /* =====================================
+           SKILLS
+        ===================================== */
+
+        .skills {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+        }
+
+
+        .skill {
+
+            border: 1px solid #cccccc;
+
+            padding: 5px 9px;
+
+            font-size: 9px;
+
+            border-radius: 3px;
+
+        }
+
+
+        /* =====================================
+           PROJECTS
+        ===================================== */
+
+        .project-item {
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .project-item h3 {
+
+            font-size: 11px;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        /* =====================================
+           RESPONSIVE
+        ===================================== */
+
+        @media (max-width: 1000px) {
+
+            .builder {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .form-section {
+
+                border-right: none;
+
+                border-bottom: 1px solid var(--border);
+
+            }
+
+
+            .preview-section {
+
+                min-height: 1000px;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+
+                height: auto;
+
+                padding: 15px 18px;
+
+                gap: 15px;
+
+                flex-wrap: wrap;
+
+            }
+
+
+            .nav-right {
+
+                gap: 12px;
+
+            }
+
+
+            .nav-link {
+
+                font-size: 10px;
+
+            }
+
+
+            .page-header {
+
+                padding: 20px;
+
+            }
+
+
+            .form-section {
+
+                padding: 20px;
+
+            }
+
+
+            .preview-section {
+
+                padding: 20px;
+
+            }
+
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+
+                gap: 0;
+
+            }
+
+
+            .resume-paper {
+
+                padding: 30px 25px;
+
+            }
+
+
+            .resume-name {
+
+                font-size: 24px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         NAVBAR
+    ===================================== -->
+
+    <header class="navbar">
+
+        <a href="dashboard.html" class="logo">
+
+            <span class="logo-box">
+                R
+            </span>
+
+            <span>
+                ResumeIt
+            </span>
+
+        </a>
+
+
+        <div class="nav-right">
+
+            <a href="dashboard.html" class="nav-link">
+                Dashboard
+            </a>
+
+            <a href="dashboard.html" class="nav-link">
+                Templates
+            </a>
+
+            <a href="index.html" class="nav-link">
+                Logout
+            </a>
+
+            <button class="download-btn">
+                Download PDF
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================
+         PAGE HEADER
+    ===================================== -->
+
+    <section class="page-header">
+
+        <h1>
+            Create Your Resume
+        </h1>
+
+        <p>
+            Enter your information and preview your
+            professional resume.
+        </p>
+
+    </section>
+
+
+
+    <!-- =====================================
+         BUILDER
+    ===================================== -->
+
+    <main class="builder">
+
+
+        <!-- =================================
+             LEFT SIDE - FORM
+        ================================= -->
+
+        <section class="form-section">
+
+
+            <h2 class="section-title">
+                Resume Information
+            </h2>
+
+            <p class="section-description">
+                Fill in your details to create your resume.
+            </p>
+
+
+
+            <!-- =============================
+                 PERSONAL INFORMATION
+            ============================== -->
+
+            <div class="form-card">
+
+                <h2>
+                    Personal Information
+                </h2>
+
+
+                <div class="form-row">
+
+
+                    <div class="input-group">
+
+                        <label for="fullName">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Enter your full name"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="jobTitle">
+                            Job Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="jobTitle"
+                            placeholder="e.g. Software Developer"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-row">
+
+
+                    <div class="input-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="your@email.com"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="phone">
+                            Phone
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Enter phone number"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <label for="location">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="City, Country"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================
+                 PROFESSIONAL SUMMARY
+            ============================== -->
+
+            <div class="form-card">
+
+                <h2>
+                    Professional Summary
+                </h2>
+
+
+                <div class="input-group">
+
+                    <label for="summary">
+                        About You
+                    </label>
+
+                    <textarea
+                        id="summary"
+                        placeholder="Write a short professional summary..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================
+                 EDUCATION
+            ============================== -->
+
+            <div class="form-card">
+
+                <h2>
+                    Education
+                </h2>
+
+
+                <div class="input-group">
+
+                    <label for="degree">
+                        Degree / Course
+                    </label>
+
+                    <input
+                        type="text"
+                        id="degree"
+                        placeholder="e.g. Bachelor of Computer Science"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="college">
+                        College / University
+                    </label>
+
+                    <input
+                        type="text"
+                        id="college"
+                        placeholder="Enter college name"
+                    >
+
+                </div>
+
+
+                <div class="form-row">
+
+
+                    <div class="input-group">
+
+                        <label for="educationStart">
+                            Start Year
+                        </label>
+
+                        <input
+                            type="text"
+                            id="educationStart"
+                            placeholder="2023"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="educationEnd">
+                            End Year
+                        </label>
+
+                        <input
+                            type="text"
+                            id="educationEnd"
+                            placeholder="2026"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================
+                 SKILLS
+            ============================== -->
+
+            <div class="form-card">
+
+                <h2>
+                    Skills
+                </h2>
+
+
+                <div class="input-group">
+
+                    <label for="skills">
+                        Skills
+                    </label>
+
+                    <textarea
+                        id="skills"
+                        placeholder="HTML, CSS, JavaScript, Python..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================
+                 EXPERIENCE
+            ============================== -->
+
+            <div class="form-card">
+
+                <h2>
+                    Experience
+                </h2>
+
+
+                <div class="input-group">
+
+                    <label for="experienceTitle">
+                        Job Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="experienceTitle"
+                        placeholder="e.g. Web Developer Intern"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="company">
+                        Company
+                    </label>
+
+                    <input
+                        type="text"
+                        id="company"
+                        placeholder="Enter company name"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="experienceDescription">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="experienceDescription"
+                        placeholder="Describe your responsibilities..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================
+                 PROJECTS
+            ============================== -->
+
+            <div class="form-card">
+
+                <h2>
+                    Projects
+                </h2>
+
+
+                <div class="input-group">
+
+                    <label for="projectName">
+                        Project Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="projectName"
+                        placeholder="Enter project name"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="projectDescription">
+                        Project Description
+                    </label>
+
+                    <textarea
+                        id="projectDescription"
+                        placeholder="Describe your project..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================
+                 SAVE BUTTON
+            ============================== -->
+
+            <button class="save-btn">
+
+                Save Resume
+
+            </button>
+
+
+        </section>
+
+
+
+        <!-- =================================
+             RIGHT SIDE - PREVIEW
+        ================================= -->
+
+        <section class="preview-section">
+
+
+            <div class="preview-header">
+
+                <h2>
+                    Resume Preview
+                </h2>
+
+                <span>
+                    Live Preview
+                </span>
+
+            </div>
+
+
+
+            <!-- =================================
+                 RESUME PAPER
+            ================================= -->
+
+            <div class="resume-paper">
+
+
+                <!-- RESUME HEADER -->
+
+                <div class="resume-header">
+
+                    <h1 class="resume-name">
+                        Your Name
+                    </h1>
+
+                    <p class="resume-job">
+                        Your Professional Title
+                    </p>
+
+
+                    <div class="resume-contact">
+
+                        <span>
+                            your@email.com
+                        </span>
+
+                        <span>
+                            +91 XXXXX XXXXX
+                        </span>
+
+                        <span>
+                            City, Country
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SUMMARY -->
+
+                <div class="resume-section">
+
+                    <h2>
+                        Profile
+                    </h2>
+
+                    <p>
+                        Your professional summary will
+                        appear here. Write a short
+                        introduction about yourself,
+                        your skills and your career goals.
+                    </p>
+
+                </div>
+
+
+
+                <!-- EDUCATION -->
+
+                <div class="resume-section">
+
+                    <h2>
+                        Education
+                    </h2>
+
+
+                    <div class="resume-item">
+
+                        <h3>
+                            Bachelor of Computer Science
+                        </h3>
+
+                        <p class="company">
+                            Your College / University
+                        </p>
+
+                        <p class="date">
+                            2023 - 2026
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EXPERIENCE -->
+
+                <div class="resume-section">
+
+                    <h2>
+                        Experience
+                    </h2>
+
+
+                    <div class="resume-item">
+
+                        <h3>
+                            Job Title
+                        </h3>
+
+                        <p class="company">
+                            Company Name
+                        </p>
+
+                        <p class="date">
+                            2025 - Present
+                        </p>
+
+                        <p>
+                            Describe your work experience,
+                            responsibilities and achievements
+                            here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SKILLS -->
+
+                <div class="resume-section">
+
+                    <h2>
+                        Skills
+                    </h2>
+
+
+                    <div class="skills">
+
+                        <span class="skill">
+                            HTML
+                        </span>
+
+                        <span class="skill">
+                            CSS
+                        </span>
+
+                        <span class="skill">
+                            JavaScript
+                        </span>
+
+                        <span class="skill">
+                            Python
+                        </span>
+
+                        <span class="skill">
+                            SQL
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PROJECTS -->
+
+                <div class="resume-section">
+
+                    <h2>
+                        Projects
+                    </h2>
+
+
+                    <div class="project-item">
+
+                        <h3>
+                            Resume Builder
+                        </h3>
+
+                        <p>
+                            A web application that helps
+                            users create professional resumes
+                            easily.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

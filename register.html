@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ResumeIt - Create Account</title>
+
+
+    <style>
+
+        /* ==============================
+           COLOR PALETTE
+        ============================== */
+
+        :root {
+
+            --bg: #111111;
+            --surface: #181818;
+            --surface-light: #202020;
+
+            --text: #f5f5f5;
+            --text-muted: #999999;
+
+            --border: #303030;
+
+            --input-bg: #121212;
+
+            --button: #f5f5f5;
+            --button-text: #111111;
+
+        }
+
+
+        /* ==============================
+           RESET
+        ============================== */
+
+        * {
+
+            margin: 0;
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        a {
+
+            color: inherit;
+
+            text-decoration: none;
+
+        }
+
+
+        /* ==============================
+           NAVBAR
+        ============================== */
+
+        .navbar {
+
+            width: 100%;
+
+            height: 70px;
+
+            padding: 0 40px;
+
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+        }
+
+
+        .logo-box {
+
+            width: 35px;
+
+            height: 35px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 6px;
+
+            background: var(--surface);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .home-link {
+
+            color: var(--text-muted);
+
+            font-size: 11px;
+
+        }
+
+
+        .home-link:hover {
+
+            color: var(--text);
+
+        }
+
+
+        /* ==============================
+           REGISTER PAGE
+        ============================== */
+
+        .register-page {
+
+            flex: 1;
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 55px 20px;
+
+        }
+
+
+        .register-container {
+
+            width: 100%;
+
+            max-width: 1050px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 430px;
+
+            gap: 90px;
+
+            align-items: center;
+
+        }
+
+
+        /* ==============================
+           LEFT INFORMATION
+        ============================== */
+
+        .register-info {
+
+            max-width: 520px;
+
+        }
+
+
+        .eyebrow {
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .register-info h1 {
+
+            font-size: 55px;
+
+            line-height: 1.05;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .register-info h1 span {
+
+            display: block;
+
+            color: var(--text-muted);
+
+        }
+
+
+        .info-text {
+
+            max-width: 470px;
+
+            color: var(--text-muted);
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+        }
+
+
+        /* ==============================
+           FEATURES
+        ============================== */
+
+        .features {
+
+            margin-top: 35px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 20px;
+
+        }
+
+
+        .feature {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+        }
+
+
+        .feature-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            flex-shrink: 0;
+
+            border: 1px solid var(--border);
+
+            border-radius: 6px;
+
+            background: var(--surface);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+        }
+
+
+        .feature h3 {
+
+            font-size: 12px;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .feature p {
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+        }
+
+
+        /* ==============================
+           REGISTER CARD
+        ============================== */
+
+        .register-card {
+
+            width: 100%;
+
+            padding: 35px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+        }
+
+
+        .form-header {
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .form-header h2 {
+
+            font-size: 24px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .form-header p {
+
+            color: var(--text-muted);
+
+            font-size: 11px;
+
+        }
+
+
+        /* ==============================
+           INPUTS
+        ============================== */
+
+        .input-group {
+
+            margin-bottom: 17px;
+
+        }
+
+
+        .input-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+        }
+
+
+        .input-group input {
+
+            width: 100%;
+
+            height: 43px;
+
+            padding: 0 12px;
+
+            background: var(--input-bg);
+
+            border: 1px solid var(--border);
+
+            border-radius: 5px;
+
+            outline: none;
+
+            color: var(--text);
+
+            font-size: 11px;
+
+        }
+
+
+        .input-group input:focus {
+
+            border-color: #666666;
+
+        }
+
+
+        .input-group input::placeholder {
+
+            color: #666666;
+
+        }
+
+
+        /* ==============================
+           PASSWORD
+        ============================== */
+
+        .password-wrapper {
+
+            width: 100%;
+
+            height: 43px;
+
+            display: flex;
+
+            align-items: center;
+
+            background: var(--input-bg);
+
+            border: 1px solid var(--border);
+
+            border-radius: 5px;
+
+        }
+
+
+        .password-wrapper:focus-within {
+
+            border-color: #666666;
+
+        }
+
+
+        .password-wrapper input {
+
+            flex: 1;
+
+            height: 100%;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            color: var(--text);
+
+            padding: 0 12px;
+
+        }
+
+
+        .show-btn {
+
+            height: 100%;
+
+            padding: 0 12px;
+
+            border: none;
+
+            background: transparent;
+
+            color: var(--text-muted);
+
+            cursor: pointer;
+
+            font-size: 10px;
+
+        }
+
+
+        .show-btn:hover {
+
+            color: var(--text);
+
+        }
+
+
+        /* ==============================
+           REGISTER BUTTON
+        ============================== */
+
+        .register-btn {
+
+            width: 100%;
+
+            height: 44px;
+
+            border: none;
+
+            border-radius: 5px;
+
+            background: var(--button);
+
+            color: var(--button-text);
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+        }
+
+
+        .register-btn:hover {
+
+            background: #dddddd;
+
+        }
+
+
+        /* ==============================
+           LOGIN LINK
+        ============================== */
+
+        .login-text {
+
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+        }
+
+
+        .login-text a {
+
+            color: var(--text);
+
+            font-weight: bold;
+
+            margin-left: 4px;
+
+        }
+
+
+        .login-text a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+
+            border-top: 1px solid var(--border);
+
+            padding: 20px 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+        }
+
+
+        footer p {
+
+            color: #666666;
+
+            font-size: 9px;
+
+        }
+
+
+        .footer-links {
+
+            display: flex;
+
+            gap: 20px;
+
+        }
+
+
+        .footer-links a {
+
+            color: var(--text-muted);
+
+            font-size: 9px;
+
+        }
+
+
+        .footer-links a:hover {
+
+            color: var(--text);
+
+        }
+
+
+        /* ==============================
+           TABLET
+        ============================== */
+
+        @media (max-width: 900px) {
+
+            .register-container {
+
+                grid-template-columns: 1fr;
+
+                max-width: 500px;
+
+                gap: 40px;
+
+            }
+
+
+            .register-info {
+
+                text-align: center;
+
+                max-width: 600px;
+
+                margin: auto;
+
+            }
+
+
+            .info-text {
+
+                margin: auto;
+
+            }
+
+
+            .features {
+
+                text-align: left;
+
+                max-width: 400px;
+
+                margin: 30px auto 0;
+
+            }
+
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+
+                height: auto;
+
+                padding: 15px 20px;
+
+            }
+
+
+            .register-page {
+
+                padding: 40px 18px;
+
+                align-items: flex-start;
+
+            }
+
+
+            .register-info h1 {
+
+                font-size: 38px;
+
+                letter-spacing: -1px;
+
+            }
+
+
+            .info-text {
+
+                font-size: 12px;
+
+            }
+
+
+            .register-card {
+
+                padding: 27px 20px;
+
+            }
+
+
+            footer {
+
+                flex-direction: column;
+
+                gap: 15px;
+
+                text-align: center;
+
+            }
+
+
+            .footer-links {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         NAVBAR
+    ============================== -->
+
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+
+            <span class="logo-box">
+                R
+            </span>
+
+            <span>
+                ResumeIt
+            </span>
+
+        </a>
+
+
+        <a href="index.html" class="home-link">
+            ← Back to Home
+        </a>
+
+    </header>
+
+
+
+    <!-- ==============================
+         REGISTER PAGE
+    ============================== -->
+
+    <main class="register-page">
+
+        <div class="register-container">
+
+
+            <!-- ==========================
+                 LEFT SIDE
+            =========================== -->
+
+            <section class="register-info">
+
+                <p class="eyebrow">
+                    GET STARTED
+                </p>
+
+
+                <h1>
+
+                    Create your
+
+                    <span>
+                        professional resume.
+                    </span>
+
+                </h1>
+
+
+                <p class="info-text">
+
+                    Create your ResumeIt account and start
+                    building a professional resume quickly
+                    and easily.
+
+                </p>
+
+
+                <div class="features">
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            CV
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Professional Templates
+                            </h3>
+
+                            <p>
+                                Choose from clean resume templates.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            PDF
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Download as PDF
+                            </h3>
+
+                            <p>
+                                Download your finished resume.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Easy to Use
+                            </h3>
+
+                            <p>
+                                Build your resume in simple steps.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==========================
+                 REGISTER FORM
+            =========================== -->
+
+            <section class="register-card">
+
+
+                <div class="form-header">
+
+                    <h2>
+                        Create account
+                    </h2>
+
+                    <p>
+                        Enter your details to get started.
+                    </p>
+
+                </div>
+
+
+
+                <form>
+
+
+                    <!-- NAME -->
+
+                    <div class="input-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Create a password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="show-btn"
+                                onclick="togglePassword('password', this)"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="input-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password
+                        </label>
+
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Confirm your password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="show-btn"
+                                onclick="togglePassword('confirmPassword', this)"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- REGISTER BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="register-btn"
+                    >
+                        Create Account
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- LOGIN -->
+
+                <p class="login-text">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                </p>
+
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ==============================
+         FOOTER
+    ============================== -->
+
+    <footer>
+
+        <p>
+            © 2026 ResumeIt. All rights reserved.
+        </p>
+
+
+        <div class="footer-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="index.html#contact">
+                Contact
+            </a>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ==============================
+         SIMPLE JAVASCRIPT
+    ============================== -->
+
+    <script>
+
+        function togglePassword(id, button) {
+
+            const input =
+                document.getElementById(id);
+
+
+            if (input.type === "password") {
+
+                input.type = "text";
+
+                button.textContent = "Hide";
+
+            } else {
+
+                input.type = "password";
+
+                button.textContent = "Show";
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
