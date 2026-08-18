@@ -443,7 +443,15 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/supabase-auth.js"></script>
     <script>
+    /* Redirect if already signed in */
+    document.addEventListener('DOMContentLoaded', function() {
+        ResumeAuth.redirectIfLoggedIn('dashboard.html');
+    });
+
     function togglePasswordVisibility(inputId, btn) {
         var input = document.getElementById(inputId);
         if (!input) return;
@@ -471,43 +479,58 @@
         }
     }
 
-    function handleRegister(event) {
+    async function handleRegister(event) {
         event.preventDefault();
-        var name = document.getElementById('fullName').value.trim();
-        var email = document.getElementById('email').value.trim();
-        var password = document.getElementById('password').value;
+        var name            = document.getElementById('fullName').value.trim();
+        var email           = document.getElementById('email').value.trim();
+        var password        = document.getElementById('password').value;
         var confirmPassword = document.getElementById('confirmPassword').value;
-        var feedback = document.getElementById('formFeedback');
-        var btn = document.getElementById('regBtn');
+        var feedback        = document.getElementById('formFeedback');
+        var btn             = document.getElementById('regBtn');
 
         if (!name || !email || !password || !confirmPassword) {
             feedback.textContent = 'Please fill in all fields.';
             feedback.className = 'form-feedback error';
             return;
         }
-
         if (password.length < 6) {
             feedback.textContent = 'Password must be at least 6 characters.';
             feedback.className = 'form-feedback error';
             return;
         }
-
         if (password !== confirmPassword) {
             feedback.textContent = 'Passwords do not match.';
             feedback.className = 'form-feedback error';
             return;
         }
 
-        btn.textContent = 'Creating account...';
+        btn.textContent = 'Creating account…';
         btn.disabled = true;
 
-        localStorage.setItem('resumeit-user', email);
-        feedback.textContent = 'Account created successfully! Redirecting...';
-        feedback.className = 'form-feedback success';
+        var sb = ResumeAuth.getClient();
+        var { error } = await sb.auth.signUp({
+            email,
+            password,
+            options: {
+                data: { full_name: name },
+                emailRedirectTo: window.location.origin + '/dashboard.html'
+            }
+        });
 
-        setTimeout(function() {
-            window.location.href = 'dashboard.html';
-        }, 600);
+        btn.disabled = false;
+        btn.textContent = 'Create Free Account';
+
+        if (error) {
+            var msg = error.message;
+            if (/already registered/i.test(msg)) msg = 'An account with this email already exists. Try logging in.';
+            feedback.textContent = msg;
+            feedback.className = 'form-feedback error';
+            return;
+        }
+
+        feedback.textContent = '✓ Account created! Check your email to confirm, then log in.';
+        feedback.className = 'form-feedback success';
+        btn.textContent = 'Check your inbox';
     }
 
     /* Theme */

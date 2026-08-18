@@ -411,7 +411,7 @@
             <a href="#templates" class="nav-link">Templates</a>
             <a href="resume-form.html" class="create-nav-btn">+ Create New</a>
             <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light / dark mode">🌙</button>
-            <a href="index.html" class="logout-btn" onclick="handleLogout()">Logout</a>
+            <button class="logout-btn" onclick="ResumeAuth.signOut()">Logout</button>
         </div>
     </header>
 
@@ -545,7 +545,7 @@
                 <h3>Account</h3>
                 <a href="login.html">Login</a>
                 <a href="register.html">Register</a>
-                <a href="index.html" onclick="handleLogout()">Logout</a>
+                <a href="index.html" onclick="ResumeAuth.signOut()">Logout</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -553,22 +553,21 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/supabase-auth.js"></script>
     <script>
-    function handleLogout() {
-        localStorage.removeItem('resumeit-user');
-    }
+    document.addEventListener('DOMContentLoaded', async function() {
+        /* ── Auth guard: redirect to login if no session ──────────── */
+        var session = await ResumeAuth.requireAuth('login.html');
+        if (!session) return; // redirect already triggered
 
-    // Load saved user name if available
-    document.addEventListener('DOMContentLoaded', function() {
-        var user = localStorage.getItem('resumeit-user');
-        if (user) {
-            var namePart = user.split('@')[0];
-            var capitalName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
-            var titleEl = document.getElementById('welcomeTitle');
-            if (titleEl) titleEl.textContent = 'Welcome back, ' + capitalName + '!';
-        }
+        /* ── Display real user name ───────────────────────────────── */
+        var displayName = ResumeAuth.getDisplayName(session);
+        var titleEl = document.getElementById('welcomeTitle');
+        if (titleEl) titleEl.textContent = 'Welcome back, ' + displayName + '!';
 
-        // Check if there is saved resume data
+        /* ── Load resume title from local storage (builder data) ──── */
         var savedData = localStorage.getItem('resumeit-data');
         if (savedData) {
             try {
@@ -579,10 +578,8 @@
                 }
             } catch(e) {}
         }
-    });
 
-    /* Theme */
-    (function(){
+        /* ── Theme ────────────────────────────────────────────────── */
         var s = localStorage.getItem('resumeit-theme');
         if (s === 'light') document.documentElement.setAttribute('data-theme','light');
         function syncIcons() {
@@ -598,9 +595,8 @@
             else { document.documentElement.setAttribute('data-theme','light'); localStorage.setItem('resumeit-theme','light'); }
             syncIcons();
         };
-        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncIcons);
-        else syncIcons();
-    })();
+        syncIcons();
+    });
     </script>
 </body>
 </html>

@@ -23,31 +23,36 @@
                 ResumeIt
             </a>
 
-            <nav class="nav-links">
+            <nav class="nav-links" id="navLinks">
                 <a href="#home">Home</a>
                 <a href="#how-it-works">How It Works</a>
                 <a href="#features">Features</a>
                 <a href="#about">About</a>
-                <a href="resume-form.html" class="create-nav-btn">Create Resume</a>
-                <a href="login.html" class="login-nav-btn">Login</a>
+                <span id="navAuthSlot">
+                    <a href="login.html" class="login-nav-btn">Login</a>
+                </span>
                 <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light / dark mode">🌙</button>
             </nav>
 
-            <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="Open menu">
-                ☰
-            </button>
+            <div class="mobile-nav-actions">
+                <button class="theme-btn mobile-theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light / dark mode">🌙</button>
+                <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">
+                    ☰
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= MOBILE NAV OVERLAY ================= -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#home" onclick="closeMenu()">Home</a>
+            <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
+            <a href="#features" onclick="closeMenu()">Features</a>
+            <a href="#about" onclick="closeMenu()">About</a>
+            <div id="mobileAuthSlot">
+                <a href="login.html" onclick="closeMenu()">Login</a>
+            </div>
         </div>
     </header>
-
-    <!-- ================= MOBILE NAV ================= -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="#home" onclick="closeMenu()">Home</a>
-        <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
-        <a href="#features" onclick="closeMenu()">Features</a>
-        <a href="#about" onclick="closeMenu()">About</a>
-        <a href="resume-form.html" onclick="closeMenu()">Create Resume</a>
-        <a href="login.html">Login</a>
-    </div>
 
     <!-- ================= HERO ================= -->
     <main>
@@ -247,6 +252,9 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/supabase-auth.js"></script>
     <script src="js/script.js"></script>
     <script src="js/theme.js"></script>
 </body>
