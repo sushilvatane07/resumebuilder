@@ -12,7 +12,16 @@
 
     function getClient() {
         if (!_client) {
-            _client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            var url = (typeof SUPABASE_URL !== 'undefined') ? SUPABASE_URL : '';
+            var key = (typeof SUPABASE_ANON_KEY !== 'undefined') ? SUPABASE_ANON_KEY : '';
+
+            if (!url || !key || url.includes('YOUR_PROJECT_ID')) {
+                console.warn('ResumeIt: Supabase credentials missing. Please set your credentials in js/supabase-config.js');
+                return null;
+            }
+            if (window.supabase && typeof window.supabase.createClient === 'function') {
+                _client = window.supabase.createClient(url, key);
+            }
         }
         return _client;
     }
@@ -22,8 +31,14 @@
     /** Returns the current session object, or null if not signed in. */
     async function getSession() {
         var sb = getClient();
-        var { data } = await sb.auth.getSession();
-        return data.session;
+        if (!sb) return null;
+        try {
+            var { data } = await sb.auth.getSession();
+            return data ? data.session : null;
+        } catch (e) {
+            console.error('ResumeIt auth error:', e);
+            return null;
+        }
     }
 
     /**
@@ -52,7 +67,9 @@
     /** Sign out and go home. */
     async function signOut() {
         var sb = getClient();
-        await sb.auth.signOut();
+        if (sb) {
+            try { await sb.auth.signOut(); } catch (e) {}
+        }
         window.location.href = 'index.html';
     }
 
