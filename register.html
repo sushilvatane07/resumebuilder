@@ -2,1122 +2,534 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create a free ResumeIt account and build your professional resume in minutes.">
     <title>ResumeIt - Create Account</title>
-
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>var _t=localStorage.getItem("resumeit-theme");if(_t==="light")document.documentElement.setAttribute("data-theme","light");</script>
     <style>
-
-        /* ==============================
-           COLOR PALETTE
-        ============================== */
-
         :root {
-
             --bg: #111111;
             --surface: #181818;
-            --surface-light: #202020;
-
-            --text: #f5f5f5;
-            --text-muted: #999999;
-
-            --border: #303030;
-
-            --input-bg: #121212;
-
-            --button: #f5f5f5;
+            --surface-light: #222222;
+            --surface-hover: #282828;
+            --text: #f0f0f0;
+            --text-muted: #888888;
+            --text-dim: #555555;
+            --border: #2a2a2a;
+            --border-hover: #444444;
+            --button: #f0f0f0;
             --button-text: #111111;
-
+            --button-hover: #d8d8d8;
+            --input-bg: #0d0d0d;
         }
-
-
-        /* ==============================
-           RESET
-        ============================== */
-
-        * {
-
-            margin: 0;
-            padding: 0;
-
-            box-sizing: border-box;
-
+        [data-theme="light"] {
+            --bg: #f8f8f8;
+            --surface: #ffffff;
+            --surface-light: #f0f0f0;
+            --surface-hover: #e8e8e8;
+            --text: #111111;
+            --text-muted: #666666;
+            --text-dim: #aaaaaa;
+            --border: #e0e0e0;
+            --border-hover: #b0b0b0;
+            --button: #111111;
+            --button-text: #f8f8f8;
+            --button-hover: #333333;
+            --input-bg: #f4f4f4;
         }
-
-
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-
-            min-height: 100vh;
-
-            font-family: Arial, Helvetica, sans-serif;
-
+            font-family: 'Inter', Arial, sans-serif;
             background: var(--bg);
-
             color: var(--text);
-
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
             display: flex;
-
             flex-direction: column;
-
+            transition: background 0.3s ease, color 0.3s ease;
         }
+        a { color: inherit; text-decoration: none; }
+        button, input { font-family: inherit; }
 
-
-        a {
-
-            color: inherit;
-
-            text-decoration: none;
-
-        }
-
-
-        /* ==============================
-           NAVBAR
-        ============================== */
-
+        /* Navbar */
         .navbar {
-
             width: 100%;
-
-            height: 70px;
-
-            padding: 0 40px;
-
             border-bottom: 1px solid var(--border);
-
+            background: rgba(17,17,17,0.9);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        [data-theme="light"] .navbar { background: rgba(248,248,248,0.92); }
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 14px 24px;
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
         }
-
-
         .logo {
-
             display: flex;
-
             align-items: center;
-
             gap: 10px;
-
-            font-size: 18px;
-
-            font-weight: bold;
-
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
         }
-
-
         .logo-box {
-
-            width: 35px;
-
-            height: 35px;
-
+            width: 32px; height: 32px;
             border: 1px solid var(--border);
-
             border-radius: 6px;
-
             background: var(--surface);
-
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 700;
+        }
+        .nav-right {
             display: flex;
-
             align-items: center;
-
-            justify-content: center;
-
-        }
-
-
-        .home-link {
-
-            color: var(--text-muted);
-
-            font-size: 11px;
-
-        }
-
-
-        .home-link:hover {
-
-            color: var(--text);
-
-        }
-
-
-        /* ==============================
-           REGISTER PAGE
-        ============================== */
-
-        .register-page {
-
-            flex: 1;
-
-            width: 100%;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            padding: 55px 20px;
-
-        }
-
-
-        .register-container {
-
-            width: 100%;
-
-            max-width: 1050px;
-
-            display: grid;
-
-            grid-template-columns: 1fr 430px;
-
-            gap: 90px;
-
-            align-items: center;
-
-        }
-
-
-        /* ==============================
-           LEFT INFORMATION
-        ============================== */
-
-        .register-info {
-
-            max-width: 520px;
-
-        }
-
-
-        .eyebrow {
-
-            color: var(--text-muted);
-
-            font-size: 10px;
-
-            font-weight: bold;
-
-            letter-spacing: 2px;
-
-            margin-bottom: 18px;
-
-        }
-
-
-        .register-info h1 {
-
-            font-size: 55px;
-
-            line-height: 1.05;
-
-            letter-spacing: -2px;
-
-            margin-bottom: 22px;
-
-        }
-
-
-        .register-info h1 span {
-
-            display: block;
-
-            color: var(--text-muted);
-
-        }
-
-
-        .info-text {
-
-            max-width: 470px;
-
-            color: var(--text-muted);
-
-            font-size: 13px;
-
-            line-height: 1.8;
-
-        }
-
-
-        /* ==============================
-           FEATURES
-        ============================== */
-
-        .features {
-
-            margin-top: 35px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 20px;
-
-        }
-
-
-        .feature {
-
-            display: flex;
-
-            align-items: center;
-
             gap: 14px;
-
         }
-
-
-        .feature-icon {
-
-            width: 40px;
-
-            height: 40px;
-
-            flex-shrink: 0;
-
-            border: 1px solid var(--border);
-
-            border-radius: 6px;
-
-            background: var(--surface);
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 10px;
-
-            font-weight: bold;
-
-        }
-
-
-        .feature h3 {
-
+        .back-link {
+            color: var(--text-muted);
             font-size: 12px;
-
-            margin-bottom: 4px;
-
+            font-weight: 500;
+            transition: color 0.2s ease;
         }
-
-
-        .feature p {
-
-            color: var(--text-muted);
-
-            font-size: 10px;
-
-        }
-
-
-        /* ==============================
-           REGISTER CARD
-        ============================== */
-
-        .register-card {
-
-            width: 100%;
-
-            padding: 35px;
-
+        .back-link:hover { color: var(--text); }
+        .theme-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
             background: var(--surface);
-
-            border: 1px solid var(--border);
-
-            border-radius: 8px;
-
-        }
-
-
-        .form-header {
-
-            margin-bottom: 28px;
-
-        }
-
-
-        .form-header h2 {
-
-            font-size: 24px;
-
-            margin-bottom: 7px;
-
-        }
-
-
-        .form-header p {
-
-            color: var(--text-muted);
-
-            font-size: 11px;
-
-        }
-
-
-        /* ==============================
-           INPUTS
-        ============================== */
-
-        .input-group {
-
-            margin-bottom: 17px;
-
-        }
-
-
-        .input-group label {
-
-            display: block;
-
-            margin-bottom: 7px;
-
-            font-size: 10px;
-
-            font-weight: bold;
-
-        }
-
-
-        .input-group input {
-
-            width: 100%;
-
-            height: 43px;
-
-            padding: 0 12px;
-
-            background: var(--input-bg);
-
-            border: 1px solid var(--border);
-
-            border-radius: 5px;
-
-            outline: none;
-
             color: var(--text);
+            cursor: pointer; font-size: 15px; line-height: 1; padding: 0;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.18s ease;
+        }
+        .theme-btn:hover { background: var(--surface-light); border-color: var(--border-hover);}
 
+        /* Main */
+        .register-page {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
+        }
+        .register-container {
+            width: 100%;
+            max-width: 980px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* Left Info */
+        .eyebrow {
+            color: var(--text-dim);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+        .register-info h1 {
+            font-size: clamp(34px, 4.5vw, 52px);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+        .register-info h1 span {
+            display: block;
+            color: var(--text-muted);
+        }
+        .info-text {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.75;
+            max-width: 440px;
+        }
+        .register-features {
+            margin-top: 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .feature-icon {
+            width: 38px; height: 38px;
+            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+            font-size: 16px;
+        }
+        .feature-item h3 { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+        .feature-item p { color: var(--text-muted); font-size: 12px; }
+
+        /* Card */
+        .register-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 36px 32px;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+        }
+        .form-header { margin-bottom: 24px; }
+        .form-header h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 6px; }
+        .form-header p { color: var(--text-muted); font-size: 13px; }
+
+        /* Form Inputs */
+        .input-group { margin-bottom: 15px; }
+        .input-group label {
+            display: block;
             font-size: 11px;
-
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
-
-
-        .input-group input:focus {
-
-            border-color: #666666;
-
+        .input-group > input {
+            width: 100%;
+            height: 42px;
+            padding: 0 12px;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            outline: none;
+            color: var(--text);
+            font-size: 13px;
+            transition: border-color 0.2s ease;
         }
-
-
-        .input-group input::placeholder {
-
-            color: #666666;
-
-        }
-
-
-        /* ==============================
-           PASSWORD
-        ============================== */
+        .input-group > input:focus { border-color: var(--border-hover); }
+        .input-group input::placeholder { color: var(--text-dim); }
 
         .password-wrapper {
-
             width: 100%;
-
-            height: 43px;
-
+            height: 42px;
             display: flex;
-
             align-items: center;
-
             background: var(--input-bg);
-
             border: 1px solid var(--border);
-
-            border-radius: 5px;
-
+            border-radius: 6px;
+            transition: border-color 0.2s ease;
         }
-
-
-        .password-wrapper:focus-within {
-
-            border-color: #666666;
-
-        }
-
-
+        .password-wrapper:focus-within { border-color: var(--border-hover); }
         .password-wrapper input {
-
             flex: 1;
-
             height: 100%;
-
+            padding: 0 12px;
             border: none;
-
             outline: none;
-
             background: transparent;
-
             color: var(--text);
-
-            padding: 0 12px;
-
+            font-size: 13px;
         }
-
-
         .show-btn {
-
             height: 100%;
-
             padding: 0 12px;
-
             border: none;
-
             background: transparent;
-
             color: var(--text-muted);
-
+            font-size: 11px;
+            font-weight: 600;
             cursor: pointer;
-
-            font-size: 10px;
-
+            transition: color 0.15s ease;
         }
+        .show-btn:hover { color: var(--text); }
 
-
-        .show-btn:hover {
-
-            color: var(--text);
-
+        /* Strength bar */
+        .strength-bar {
+            height: 3px;
+            background: var(--border);
+            border-radius: 2px;
+            margin-top: 6px;
+            overflow: hidden;
         }
-
-
-        /* ==============================
-           REGISTER BUTTON
-        ============================== */
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.25s ease, background-color 0.25s ease;
+        }
 
         .register-btn {
-
             width: 100%;
-
-            height: 44px;
-
+            height: 42px;
             border: none;
-
-            border-radius: 5px;
-
+            border-radius: 6px;
             background: var(--button);
-
             color: var(--button-text);
-
-            font-size: 11px;
-
-            font-weight: bold;
-
+            font-size: 13px;
+            font-weight: 600;
             cursor: pointer;
-
-            margin-top: 5px;
-
+            margin-top: 6px;
+            transition: background 0.2s ease, transform 0.15s ease;
         }
+        .register-btn:hover { background: var(--button-hover); transform: translateY(-1px); }
+        .register-btn:active { transform: translateY(0); }
 
-
-        .register-btn:hover {
-
-            background: #dddddd;
-
+        .form-feedback {
+            margin-top: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            min-height: 16px;
+            text-align: center;
         }
-
-
-        /* ==============================
-           LOGIN LINK
-        ============================== */
+        .form-feedback.error { color: #e05555; }
+        .form-feedback.success { color: #4caf7d; }
 
         .login-text {
-
-            margin-top: 22px;
-
+            margin-top: 20px;
             text-align: center;
-
+            font-size: 12px;
             color: var(--text-muted);
-
-            font-size: 10px;
-
         }
-
-
         .login-text a {
-
             color: var(--text);
-
-            font-weight: bold;
-
+            font-weight: 600;
             margin-left: 4px;
-
         }
+        .login-text a:hover { text-decoration: underline; }
 
-
-        .login-text a:hover {
-
-            text-decoration: underline;
-
-        }
-
-
-        /* ==============================
-           FOOTER
-        ============================== */
-
-        footer {
-
+        /* Footer */
+        .footer {
             border-top: 1px solid var(--border);
-
-            padding: 20px 30px;
-
+            padding: 20px 24px;
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            font-size: 11px;
+            color: var(--text-dim);
         }
+        .footer-links { display: flex; gap: 16px; }
+        .footer-links a { color: var(--text-muted); transition: color 0.2s ease; }
+        .footer-links a:hover { color: var(--text); }
 
-
-        footer p {
-
-            color: #666666;
-
-            font-size: 9px;
-
+        @media (max-width: 860px) {
+            .register-container { grid-template-columns: 1fr; gap: 40px; }
+            .register-info { text-align: center; }
+            .info-text { margin: 0 auto; }
+            .register-features { max-width: 360px; margin: 24px auto 0; text-align: left; }
         }
-
-
-        .footer-links {
-
-            display: flex;
-
-            gap: 20px;
-
+        @media (max-width: 500px) {
+            .register-card { padding: 24px 20px; }
+            .footer { flex-direction: column; gap: 10px; text-align: center; }
         }
-
-
-        .footer-links a {
-
-            color: var(--text-muted);
-
-            font-size: 9px;
-
-        }
-
-
-        .footer-links a:hover {
-
-            color: var(--text);
-
-        }
-
-
-        /* ==============================
-           TABLET
-        ============================== */
-
-        @media (max-width: 900px) {
-
-            .register-container {
-
-                grid-template-columns: 1fr;
-
-                max-width: 500px;
-
-                gap: 40px;
-
-            }
-
-
-            .register-info {
-
-                text-align: center;
-
-                max-width: 600px;
-
-                margin: auto;
-
-            }
-
-
-            .info-text {
-
-                margin: auto;
-
-            }
-
-
-            .features {
-
-                text-align: left;
-
-                max-width: 400px;
-
-                margin: 30px auto 0;
-
-            }
-
-        }
-
-
-        /* ==============================
-           MOBILE
-        ============================== */
-
-        @media (max-width: 600px) {
-
-            .navbar {
-
-                height: auto;
-
-                padding: 15px 20px;
-
-            }
-
-
-            .register-page {
-
-                padding: 40px 18px;
-
-                align-items: flex-start;
-
-            }
-
-
-            .register-info h1 {
-
-                font-size: 38px;
-
-                letter-spacing: -1px;
-
-            }
-
-
-            .info-text {
-
-                font-size: 12px;
-
-            }
-
-
-            .register-card {
-
-                padding: 27px 20px;
-
-            }
-
-
-            footer {
-
-                flex-direction: column;
-
-                gap: 15px;
-
-                text-align: center;
-
-            }
-
-
-            .footer-links {
-
-                flex-wrap: wrap;
-
-                justify-content: center;
-
-            }
-
-        }
-
     </style>
-
 </head>
 
-
 <body>
-
-
-    <!-- ==============================
-         NAVBAR
-    ============================== -->
-
+    <!-- Navbar -->
     <header class="navbar">
-
-        <a href="index.html" class="logo">
-
-            <span class="logo-box">
-                R
-            </span>
-
-            <span>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-box">R</span>
                 ResumeIt
-            </span>
-
-        </a>
-
-
-        <a href="index.html" class="home-link">
-            ← Back to Home
-        </a>
-
+            </a>
+            <div class="nav-right">
+                <a href="index.html" class="back-link">← Back to Home</a>
+                <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light / dark mode">🌙</button>
+            </div>
+        </div>
     </header>
 
-
-
-    <!-- ==============================
-         REGISTER PAGE
-    ============================== -->
-
+    <!-- Main -->
     <main class="register-page">
-
         <div class="register-container">
 
+            <div class="register-info">
+                <p class="eyebrow">Get Started</p>
+                <h1>Create your account. <span>It's completely free.</span></h1>
+                <p class="info-text">Join thousands of job seekers who build polished, professional resumes with ResumeIt in minutes.</p>
 
-            <!-- ==========================
-                 LEFT SIDE
-            =========================== -->
-
-            <section class="register-info">
-
-                <p class="eyebrow">
-                    GET STARTED
-                </p>
-
-
-                <h1>
-
-                    Create your
-
-                    <span>
-                        professional resume.
-                    </span>
-
-                </h1>
-
-
-                <p class="info-text">
-
-                    Create your ResumeIt account and start
-                    building a professional resume quickly
-                    and easily.
-
-                </p>
-
-
-                <div class="features">
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            CV
-                        </div>
-
+                <div class="register-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
                         <div>
-
-                            <h3>
-                                Professional Templates
-                            </h3>
-
-                            <p>
-                                Choose from clean resume templates.
-                            </p>
-
+                            <h3>2-Minute Setup</h3>
+                            <p>No complicated software or design skills needed.</p>
                         </div>
-
                     </div>
-
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            PDF
-                        </div>
-
+                    <div class="feature-item">
+                        <div class="feature-icon">🎨</div>
                         <div>
-
-                            <h3>
-                                Download as PDF
-                            </h3>
-
-                            <p>
-                                Download your finished resume.
-                            </p>
-
+                            <h3>Modern Formatting</h3>
+                            <p>Clean typography designed to pass ATS screening.</p>
                         </div>
-
                     </div>
-
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            ✓
-                        </div>
-
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
                         <div>
-
-                            <h3>
-                                Easy to Use
-                            </h3>
-
-                            <p>
-                                Build your resume in simple steps.
-                            </p>
-
+                            <h3>Auto-Saved Progress</h3>
+                            <p>Your work is safely saved in your browser as you type.</p>
                         </div>
-
                     </div>
-
                 </div>
+            </div>
 
-            </section>
-
-
-
-            <!-- ==========================
-                 REGISTER FORM
-            =========================== -->
-
-            <section class="register-card">
-
-
+            <div class="register-card">
                 <div class="form-header">
-
-                    <h2>
-                        Create account
-                    </h2>
-
-                    <p>
-                        Enter your details to get started.
-                    </p>
-
+                    <h2>Create Account</h2>
+                    <p>Start crafting your new resume today.</p>
                 </div>
 
-
-
-                <form>
-
-
-                    <!-- NAME -->
-
+                <form id="registerForm" onsubmit="handleRegister(event)">
                     <div class="input-group">
-
-                        <label for="name">
-                            Full Name
-                        </label>
-
-                        <input
-                            type="text"
-                            id="name"
-                            placeholder="Enter your full name"
-                            required
-                        >
-
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" placeholder="John Doe" required autocomplete="name">
                     </div>
 
-
-
-                    <!-- EMAIL -->
-
                     <div class="input-group">
-
-                        <label for="email">
-                            Email
-                        </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Enter your email"
-                            required
-                        >
-
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="you@example.com" required autocomplete="email">
                     </div>
 
-
-
-                    <!-- PASSWORD -->
-
                     <div class="input-group">
-
-                        <label for="password">
-                            Password
-                        </label>
-
-
+                        <label for="password">Password</label>
                         <div class="password-wrapper">
-
-                            <input
-                                type="password"
-                                id="password"
-                                placeholder="Create a password"
-                                required
-                            >
-
-                            <button
-                                type="button"
-                                class="show-btn"
-                                onclick="togglePassword('password', this)"
-                            >
-                                Show
-                            </button>
-
+                            <input type="password" id="password" placeholder="At least 6 characters" required autocomplete="new-password" oninput="checkStrength(this.value)">
+                            <button type="button" class="show-btn" onclick="togglePasswordVisibility('password', this)">Show</button>
                         </div>
-
+                        <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
                     </div>
-
-
-
-                    <!-- CONFIRM PASSWORD -->
 
                     <div class="input-group">
-
-                        <label for="confirmPassword">
-                            Confirm Password
-                        </label>
-
-
+                        <label for="confirmPassword">Confirm Password</label>
                         <div class="password-wrapper">
-
-                            <input
-                                type="password"
-                                id="confirmPassword"
-                                placeholder="Confirm your password"
-                                required
-                            >
-
-                            <button
-                                type="button"
-                                class="show-btn"
-                                onclick="togglePassword('confirmPassword', this)"
-                            >
-                                Show
-                            </button>
-
+                            <input type="password" id="confirmPassword" placeholder="Re-enter your password" required autocomplete="new-password">
+                            <button type="button" class="show-btn" onclick="togglePasswordVisibility('confirmPassword', this)">Show</button>
                         </div>
-
                     </div>
 
-
-
-                    <!-- REGISTER BUTTON -->
-
-                    <button
-                        type="submit"
-                        class="register-btn"
-                    >
-                        Create Account
-                    </button>
-
-
+                    <button type="submit" class="register-btn" id="regBtn">Create Free Account</button>
+                    <div class="form-feedback" id="formFeedback"></div>
                 </form>
 
-
-
-                <!-- LOGIN -->
-
                 <p class="login-text">
-
                     Already have an account?
-
-                    <a href="login.html">
-                        Login
-                    </a>
-
+                    <a href="login.html">Login</a>
                 </p>
-
-
-            </section>
+            </div>
 
         </div>
-
     </main>
 
-
-
-    <!-- ==============================
-         FOOTER
-    ============================== -->
-
-    <footer>
-
-        <p>
-            © 2026 ResumeIt. All rights reserved.
-        </p>
-
-
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 ResumeIt. All rights reserved.</p>
         <div class="footer-links">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="dashboard.html">
-                Dashboard
-            </a>
-
-            <a href="login.html">
-                Login
-            </a>
-
-            <a href="index.html#contact">
-                Contact
-            </a>
-
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="login.html">Login</a>
+            <a href="index.html#contact">Contact</a>
         </div>
-
     </footer>
 
-
-
-    <!-- ==============================
-         SIMPLE JAVASCRIPT
-    ============================== -->
-
     <script>
+    function togglePasswordVisibility(inputId, btn) {
+        var input = document.getElementById(inputId);
+        if (!input) return;
+        if (input.type === 'password') {
+            input.type = 'text';
+            btn.textContent = 'Hide';
+        } else {
+            input.type = 'password';
+            btn.textContent = 'Show';
+        }
+    }
 
-        function togglePassword(id, button) {
+    function checkStrength(pwd) {
+        var fill = document.getElementById('strengthFill');
+        if (!pwd) { fill.style.width = '0%'; return; }
+        if (pwd.length < 6) {
+            fill.style.width = '30%';
+            fill.style.backgroundColor = '#e05555';
+        } else if (pwd.length < 10) {
+            fill.style.width = '65%';
+            fill.style.backgroundColor = '#e0a055';
+        } else {
+            fill.style.width = '100%';
+            fill.style.backgroundColor = '#4caf7d';
+        }
+    }
 
-            const input =
-                document.getElementById(id);
+    function handleRegister(event) {
+        event.preventDefault();
+        var name = document.getElementById('fullName').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        var feedback = document.getElementById('formFeedback');
+        var btn = document.getElementById('regBtn');
 
-
-            if (input.type === "password") {
-
-                input.type = "text";
-
-                button.textContent = "Hide";
-
-            } else {
-
-                input.type = "password";
-
-                button.textContent = "Show";
-
-            }
-
+        if (!name || !email || !password || !confirmPassword) {
+            feedback.textContent = 'Please fill in all fields.';
+            feedback.className = 'form-feedback error';
+            return;
         }
 
+        if (password.length < 6) {
+            feedback.textContent = 'Password must be at least 6 characters.';
+            feedback.className = 'form-feedback error';
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            feedback.textContent = 'Passwords do not match.';
+            feedback.className = 'form-feedback error';
+            return;
+        }
+
+        btn.textContent = 'Creating account...';
+        btn.disabled = true;
+
+        localStorage.setItem('resumeit-user', email);
+        feedback.textContent = 'Account created successfully! Redirecting...';
+        feedback.className = 'form-feedback success';
+
+        setTimeout(function() {
+            window.location.href = 'dashboard.html';
+        }, 600);
+    }
+
+    /* Theme */
+    (function(){
+        var s = localStorage.getItem('resumeit-theme');
+        if (s === 'light') document.documentElement.setAttribute('data-theme','light');
+        function syncIcons() {
+            var light = document.documentElement.getAttribute('data-theme') === 'light';
+            document.querySelectorAll('.theme-btn').forEach(function(b){
+                b.textContent = light ? '☀️' : '🌙';
+                b.title = light ? 'Switch to dark mode' : 'Switch to light mode';
+            });
+        }
+        window.toggleTheme = function() {
+            var light = document.documentElement.getAttribute('data-theme') === 'light';
+            if (light) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('resumeit-theme','dark'); }
+            else { document.documentElement.setAttribute('data-theme','light'); localStorage.setItem('resumeit-theme','light'); }
+            syncIcons();
+        };
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncIcons);
+        else syncIcons();
+    })();
     </script>
-
-
 </body>
-
 </html>

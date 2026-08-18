@@ -4,1108 +4,531 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="Sign in to your ResumeIt account to manage and edit your professional resumes.">
     <title>ResumeIt - Login</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>var _t=localStorage.getItem("resumeit-theme");if(_t==="light")document.documentElement.setAttribute("data-theme","light");</script>
     <style>
-
-        /* ===============================
-           COLOR PALETTE
-        =============================== */
-
         :root {
             --bg: #111111;
             --surface: #181818;
-            --surface-light: #202020;
-            --text: #f5f5f5;
-            --text-muted: #999999;
-            --border: #303030;
-            --input-bg: #121212;
-            --button: #f5f5f5;
+            --surface-light: #222222;
+            --surface-hover: #282828;
+            --text: #f0f0f0;
+            --text-muted: #888888;
+            --text-dim: #555555;
+            --border: #2a2a2a;
+            --border-hover: #444444;
+            --button: #f0f0f0;
             --button-text: #111111;
+            --button-hover: #d8d8d8;
+            --input-bg: #0d0d0d;
         }
-
-
-        /* ===============================
-           RESET
-        =============================== */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        [data-theme="light"] {
+            --bg: #f8f8f8;
+            --surface: #ffffff;
+            --surface-light: #f0f0f0;
+            --surface-hover: #e8e8e8;
+            --text: #111111;
+            --text-muted: #666666;
+            --text-dim: #aaaaaa;
+            --border: #e0e0e0;
+            --border-hover: #b0b0b0;
+            --button: #111111;
+            --button-text: #f8f8f8;
+            --button-hover: #333333;
+            --input-bg: #f4f4f4;
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            min-height: 100vh;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Inter', Arial, sans-serif;
             background: var(--bg);
             color: var(--text);
-
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            transition: background 0.3s ease, color 0.3s ease;
         }
+        a { color: inherit; text-decoration: none; }
+        button, input { font-family: inherit; }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button,
-        input {
-            font-family: inherit;
-        }
-
-
-        /* ===============================
-           NAVBAR
-        =============================== */
-
+        /* Navbar */
         .navbar {
             width: 100%;
             border-bottom: 1px solid var(--border);
-            background: var(--bg);
+            background: rgba(17,17,17,0.9);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-
+        [data-theme="light"] .navbar { background: rgba(248,248,248,0.92); }
         .nav-container {
-            width: 100%;
             max-width: 1200px;
             margin: auto;
-
-            padding: 18px 30px;
-
+            padding: 14px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
-
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
+            letter-spacing: -0.3px;
         }
-
         .logo-box {
-            width: 34px;
-            height: 34px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
+            width: 32px; height: 32px;
             border: 1px solid var(--border);
             border-radius: 6px;
-
             background: var(--surface);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 700;
         }
-
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
         .back-link {
             color: var(--text-muted);
             font-size: 12px;
-
-            transition: 0.2s;
+            font-weight: 500;
+            transition: color 0.2s ease;
         }
-
-        .back-link:hover {
+        .back-link:hover { color: var(--text); }
+        .theme-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            background: var(--surface);
             color: var(--text);
+            cursor: pointer; font-size: 15px; line-height: 1; padding: 0;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.18s ease;
         }
+        .theme-btn:hover { background: var(--surface-light); border-color: var(--border-hover);}
 
-
-        /* ===============================
-           LOGIN PAGE
-        =============================== */
-
+        /* Main */
         .login-page {
             flex: 1;
-
-            width: 100%;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
-            padding: 70px 30px;
+            padding: 60px 24px;
         }
-
         .login-container {
             width: 100%;
-            max-width: 1050px;
-
+            max-width: 980px;
             display: grid;
-            grid-template-columns: 1fr 430px;
-
-            gap: 100px;
-
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
             align-items: center;
         }
 
-
-        /* ===============================
-           LEFT SIDE
-        =============================== */
-
-        .login-info {
-            max-width: 520px;
-        }
-
+        /* Left Info */
         .eyebrow {
-            color: var(--text-muted);
-
+            color: var(--text-dim);
             font-size: 10px;
             font-weight: 700;
-
+            text-transform: uppercase;
             letter-spacing: 2px;
-
+            margin-bottom: 16px;
+        }
+        .login-info h1 {
+            font-size: clamp(34px, 4.5vw, 52px);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            font-weight: 700;
             margin-bottom: 18px;
         }
-
-        .login-info h1 {
-            font-size: clamp(42px, 5vw, 62px);
-
-            line-height: 1.05;
-
-            letter-spacing: -2px;
-
-            margin-bottom: 25px;
-        }
-
         .login-info h1 span {
             display: block;
             color: var(--text-muted);
         }
-
         .info-text {
-            max-width: 470px;
-
             color: var(--text-muted);
-
             font-size: 14px;
-
-            line-height: 1.8;
+            line-height: 1.75;
+            max-width: 440px;
         }
-
-
-        /* ===============================
-           FEATURES
-        =============================== */
-
         .login-features {
-            margin-top: 40px;
-
+            margin-top: 36px;
             display: flex;
             flex-direction: column;
-
-            gap: 22px;
+            gap: 16px;
         }
-
         .feature-item {
             display: flex;
             align-items: center;
-
-            gap: 15px;
+            gap: 14px;
         }
-
         .feature-icon {
-            width: 40px;
-            height: 40px;
-
+            width: 38px; height: 38px;
             flex-shrink: 0;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
+            display: flex; align-items: center; justify-content: center;
             border: 1px solid var(--border);
-            border-radius: 6px;
-
-            background: var(--surface);
-
-            font-size: 9px;
-            font-weight: 700;
-        }
-
-        .feature-item h3 {
-            font-size: 13px;
-            margin-bottom: 3px;
-        }
-
-        .feature-item p {
-            color: var(--text-muted);
-            font-size: 11px;
-        }
-
-
-        /* ===============================
-           LOGIN CARD
-        =============================== */
-
-        .login-card {
-            width: 100%;
-
-            padding: 38px;
-
-            background: var(--surface);
-
-            border: 1px solid var(--border);
-
             border-radius: 8px;
+            background: var(--surface);
+            font-size: 16px;
         }
+        .feature-item h3 { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+        .feature-item p { color: var(--text-muted); font-size: 12px; }
 
-        .form-header {
-            margin-bottom: 30px;
+        /* Login Card */
+        .login-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 36px 32px;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.3);
         }
+        .form-header { margin-bottom: 24px; }
+        .form-header h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 6px; }
+        .form-header p { color: var(--text-muted); font-size: 13px; }
 
-        .form-header h2 {
-            font-size: 25px;
-            margin-bottom: 7px;
-        }
-
-        .form-header p {
-            color: var(--text-muted);
-            font-size: 12px;
-        }
-
-
-        /* ===============================
-           INPUTS
-        =============================== */
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
+        /* Form Inputs */
+        .input-group { margin-bottom: 16px; }
         .input-group label {
             display: block;
-
-            margin-bottom: 8px;
-
             font-size: 11px;
             font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
-
         .input-group > input {
             width: 100%;
-            height: 45px;
-
-            padding: 0 13px;
-
+            height: 42px;
+            padding: 0 12px;
             background: var(--input-bg);
-
             border: 1px solid var(--border);
-
-            border-radius: 5px;
-
+            border-radius: 6px;
             outline: none;
-
             color: var(--text);
-
-            font-size: 12px;
+            font-size: 13px;
+            transition: border-color 0.2s ease;
         }
-
-        .input-group > input:focus {
-            border-color: #666666;
-        }
-
-        .input-group input::placeholder {
-            color: #666666;
-        }
-
-
-        /* ===============================
-           PASSWORD
-        =============================== */
+        .input-group > input:focus { border-color: var(--border-hover); }
+        .input-group input::placeholder { color: var(--text-dim); }
 
         .password-wrapper {
             width: 100%;
-            height: 45px;
-
+            height: 42px;
             display: flex;
             align-items: center;
-
             background: var(--input-bg);
-
             border: 1px solid var(--border);
-
-            border-radius: 5px;
+            border-radius: 6px;
+            transition: border-color 0.2s ease;
         }
-
-        .password-wrapper:focus-within {
-            border-color: #666666;
-        }
-
+        .password-wrapper:focus-within { border-color: var(--border-hover); }
         .password-wrapper input {
             flex: 1;
-
-            width: 100%;
             height: 100%;
-
-            padding: 0 13px;
-
+            padding: 0 12px;
             border: none;
             outline: none;
-
             background: transparent;
-
             color: var(--text);
-
-            font-size: 12px;
+            font-size: 13px;
         }
-
-        .password-wrapper input::placeholder {
-            color: #666666;
-        }
-
         .show-btn {
             height: 100%;
-
-            padding: 0 13px;
-
+            padding: 0 12px;
             border: none;
-
             background: transparent;
-
             color: var(--text-muted);
-
-            font-size: 10px;
-
+            font-size: 11px;
+            font-weight: 600;
             cursor: pointer;
+            transition: color 0.15s ease;
         }
-
-        .show-btn:hover {
-            color: var(--text);
-        }
-
-
-        /* ===============================
-           LOGIN BUTTON
-        =============================== */
+        .show-btn:hover { color: var(--text); }
 
         .login-btn {
             width: 100%;
-            height: 45px;
-
+            height: 42px;
             border: none;
-
-            border-radius: 5px;
-
+            border-radius: 6px;
             background: var(--button);
-
             color: var(--button-text);
-
-            font-size: 12px;
-
-            font-weight: 700;
-
+            font-size: 13px;
+            font-weight: 600;
             cursor: pointer;
-
-            transition: 0.2s;
+            margin-top: 4px;
+            transition: background 0.2s ease, transform 0.15s ease;
         }
+        .login-btn:hover { background: var(--button-hover); transform: translateY(-1px); }
+        .login-btn:active { transform: translateY(0); }
 
-        .login-btn:hover {
-            background: #dddddd;
+        .form-feedback {
+            margin-top: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            min-height: 16px;
+            text-align: center;
         }
-
-
-        /* ===============================
-           DIVIDER
-        =============================== */
+        .form-feedback.error { color: #e05555; }
+        .form-feedback.success { color: #4caf7d; }
 
         .divider {
-            width: 100%;
-
             display: flex;
             align-items: center;
-
-            gap: 12px;
-
-            margin: 23px 0;
-
-            color: #666666;
-
-            font-size: 9px;
+            gap: 10px;
+            margin: 20px 0;
+            color: var(--text-dim);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
-
-        .divider::before,
-        .divider::after {
+        .divider::before, .divider::after {
             content: "";
-
             flex: 1;
-
             height: 1px;
-
             background: var(--border);
         }
 
-
-        /* ===============================
-           MAGIC LINK
-        =============================== */
-
         .magic-link-btn {
             width: 100%;
-            height: 45px;
-
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-
             gap: 8px;
-
             border: 1px solid var(--border);
-
-            border-radius: 5px;
-
+            border-radius: 6px;
             background: transparent;
-
             color: var(--text);
-
-            font-size: 11px;
-
+            font-size: 12px;
+            font-weight: 500;
             cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
         }
-
-        .magic-link-btn:hover {
-            background: var(--surface-light);
-        }
-
-        .mail-icon {
-            font-size: 14px;
-        }
-
-
-        /* ===============================
-           REGISTER LINK
-        =============================== */
+        .magic-link-btn:hover { background: var(--surface-light); border-color: var(--border-hover); }
 
         .register-text {
-            margin-top: 25px;
-
+            margin-top: 20px;
             text-align: center;
-
-            font-size: 11px;
-
+            font-size: 12px;
             color: var(--text-muted);
         }
-
         .register-text a {
-            margin-left: 4px;
-
             color: var(--text);
-
             font-weight: 600;
+            margin-left: 4px;
         }
+        .register-text a:hover { text-decoration: underline; }
 
-        .register-text a:hover {
-            text-decoration: underline;
-        }
-
-
-        /* ===============================
-           FOOTER
-        =============================== */
-
+        /* Footer */
         .footer {
-            width: 100%;
-
             border-top: 1px solid var(--border);
-
-            padding: 22px 30px;
-
+            padding: 20px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-
-            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            font-size: 11px;
+            color: var(--text-dim);
         }
+        .footer-links { display: flex; gap: 16px; }
+        .footer-links a { color: var(--text-muted); transition: color 0.2s ease; }
+        .footer-links a:hover { color: var(--text); }
 
-        .footer p {
-            color: #666666;
-            font-size: 10px;
+        @media (max-width: 860px) {
+            .login-container { grid-template-columns: 1fr; gap: 40px; }
+            .login-info { text-align: center; }
+            .info-text { margin: 0 auto; }
+            .login-features { max-width: 360px; margin: 24px auto 0; text-align: left; }
         }
-
-        .footer-links {
-            display: flex;
-            gap: 20px;
+        @media (max-width: 500px) {
+            .login-card { padding: 24px 20px; }
+            .footer { flex-direction: column; gap: 10px; text-align: center; }
         }
-
-        .footer-links a {
-            color: var(--text-muted);
-            font-size: 10px;
-        }
-
-        .footer-links a:hover {
-            color: var(--text);
-        }
-
-
-        /* ===============================
-           TABLET
-        =============================== */
-
-        @media (max-width: 900px) {
-
-            .login-container {
-                grid-template-columns: 1fr;
-
-                max-width: 500px;
-
-                gap: 45px;
-            }
-
-            .login-info {
-                text-align: center;
-
-                max-width: 600px;
-
-                margin: auto;
-            }
-
-            .info-text {
-                margin: auto;
-            }
-
-            .login-features {
-                text-align: left;
-
-                max-width: 400px;
-
-                margin: 35px auto 0;
-            }
-        }
-
-
-        /* ===============================
-           MOBILE
-        =============================== */
-
-        @media (max-width: 600px) {
-
-            .nav-container {
-                padding: 15px 20px;
-            }
-
-            .logo {
-                font-size: 16px;
-            }
-
-            .logo-box {
-                width: 31px;
-                height: 31px;
-            }
-
-            .back-link {
-                font-size: 10px;
-            }
-
-            .login-page {
-                padding: 45px 18px;
-
-                align-items: flex-start;
-            }
-
-            .login-container {
-                gap: 35px;
-            }
-
-            .login-info h1 {
-                font-size: 38px;
-
-                letter-spacing: -1.5px;
-            }
-
-            .info-text {
-                font-size: 13px;
-            }
-
-            .login-features {
-                margin-top: 30px;
-            }
-
-            .login-card {
-                padding: 28px 20px;
-            }
-
-            .form-header h2 {
-                font-size: 23px;
-            }
-
-            .footer {
-                padding: 20px;
-
-                flex-direction: column;
-
-                text-align: center;
-            }
-
-            .footer-links {
-                flex-wrap: wrap;
-
-                justify-content: center;
-
-                gap: 15px;
-            }
-        }
-
-
-        /* ===============================
-           SMALL MOBILE
-        =============================== */
-
-        @media (max-width: 380px) {
-
-            .login-info h1 {
-                font-size: 33px;
-            }
-
-            .login-card {
-                padding: 24px 17px;
-            }
-
-            .feature-item h3 {
-                font-size: 12px;
-            }
-
-            .feature-item p {
-                font-size: 10px;
-            }
-        }
-
     </style>
-
 </head>
 
-
 <body>
-
-
-    <!-- ================= NAVBAR ================= -->
-
+    <!-- Navbar -->
     <header class="navbar">
-
         <div class="nav-container">
-
             <a href="index.html" class="logo">
-
                 <span class="logo-box">R</span>
-
-                <span>ResumeIt</span>
-
+                ResumeIt
             </a>
-
-
-            <a href="index.html" class="back-link">
-                ← Back to Home
-            </a>
-
+            <div class="nav-right">
+                <a href="index.html" class="back-link">← Back to Home</a>
+                <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light / dark mode">🌙</button>
+            </div>
         </div>
-
     </header>
 
-
-
-    <!-- ================= LOGIN PAGE ================= -->
-
+    <!-- Main -->
     <main class="login-page">
-
         <div class="login-container">
 
-
-            <!-- LEFT SIDE -->
-
             <div class="login-info">
-
-                <p class="eyebrow">
-                    WELCOME BACK
-                </p>
-
-
-                <h1>
-
-                    Build a resume
-
-                    <span>
-                        you're proud of.
-                    </span>
-
-                </h1>
-
-
-                <p class="info-text">
-
-                    Sign in to continue creating and managing
-                    your professional resume with ResumeIt.
-
-                </p>
-
+                <p class="eyebrow">Welcome Back</p>
+                <h1>Log in to your account. <span>Continue building.</span></h1>
+                <p class="info-text">ResumeIt lets you quickly create, edit, and export clean resumes tailored for your target career.</p>
 
                 <div class="login-features">
-
-
                     <div class="feature-item">
-
-                        <div class="feature-icon">
-                            CV
-                        </div>
-
+                        <div class="feature-icon">📄</div>
                         <div>
-
-                            <h3>
-                                Professional Templates
-                            </h3>
-
-                            <p>
-                                Choose a clean resume template.
-                            </p>
-
+                            <h3>Professional Templates</h3>
+                            <p>Proven, recruiter-approved formatting.</p>
                         </div>
-
                     </div>
-
-
                     <div class="feature-item">
-
-                        <div class="feature-icon">
-                            PDF
-                        </div>
-
+                        <div class="feature-icon">📥</div>
                         <div>
-
-                            <h3>
-                                Download as PDF
-                            </h3>
-
-                            <p>
-                                Create and download your resume.
-                            </p>
-
+                            <h3>Instant PDF Export</h3>
+                            <p>Clean formatting ready for job applications.</p>
                         </div>
-
                     </div>
-
-
                     <div class="feature-item">
-
-                        <div class="feature-icon">
-                            ✓
-                        </div>
-
+                        <div class="feature-icon">⚡</div>
                         <div>
-
-                            <h3>
-                                Simple & Easy
-                            </h3>
-
-                            <p>
-                                Create your resume in a few steps.
-                            </p>
-
+                            <h3>Live Synchronous Preview</h3>
+                            <p>See changes instantaneously as you type.</p>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
-
-
-            <!-- ================= LOGIN FORM ================= -->
 
             <div class="login-card">
-
                 <div class="form-header">
-
-                    <h2>
-                        Welcome back
-                    </h2>
-
-                    <p>
-                        Login to your ResumeIt account.
-                    </p>
-
+                    <h2>Sign In</h2>
+                    <p>Enter your credentials to access your dashboard.</p>
                 </div>
 
-
-                <form id="loginForm">
-
-
-                    <!-- EMAIL -->
-
+                <form id="loginForm" onsubmit="handleLogin(event)">
                     <div class="input-group">
-
-                        <label for="email">
-                            Email
-                        </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Enter your email"
-                            required
-                        >
-
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="you@example.com" required autocomplete="email">
                     </div>
 
-
-                    <!-- PASSWORD -->
-
                     <div class="input-group">
-
-                        <label for="password">
-                            Password
-                        </label>
-
-
+                        <label for="password">Password</label>
                         <div class="password-wrapper">
-
-                            <input
-                                type="password"
-                                id="password"
-                                placeholder="Enter your password"
-                                required
-                            >
-
-
-                            <button
-                                type="button"
-                                id="togglePassword"
-                                class="show-btn"
-                            >
-                                Show
-                            </button>
-
+                            <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+                            <button type="button" id="togglePasswordBtn" class="show-btn" onclick="togglePasswordVisibility('password', this)">Show</button>
                         </div>
-
                     </div>
 
-
-                    <!-- LOGIN -->
-
-                    <button
-                        type="submit"
-                        class="login-btn"
-                    >
-                        Login
-                    </button>
-
-
-                    <!-- DIVIDER -->
-
-                    <div class="divider">
-
-                        <span>OR</span>
-
-                    </div>
-
-
-                    <!-- MAGIC LINK -->
-
-                    <button
-                        type="button"
-                        class="magic-link-btn"
-                        id="magicLinkBtn"
-                    >
-
-                        <span class="mail-icon">
-                            ✉
-                        </span>
-
-                        Continue with Magic Link
-
-                    </button>
-
-
+                    <button type="submit" class="login-btn" id="submitBtn">Sign In</button>
+                    <div class="form-feedback" id="formFeedback"></div>
                 </form>
 
+                <div class="divider">OR</div>
 
-                <!-- REGISTER -->
+                <button type="button" class="magic-link-btn" onclick="handleMagicLink()">
+                    ✉ Send Magic Link to Email
+                </button>
 
-                <div class="register-text">
-
+                <p class="register-text">
                     Don't have an account?
-
-                    <a href="register.html">
-                        Create account
-                    </a>
-
-                </div>
-
+                    <a href="register.html">Create account</a>
+                </p>
             </div>
 
         </div>
-
     </main>
 
-
-
-    <!-- ================= FOOTER ================= -->
-
+    <!-- Footer -->
     <footer class="footer">
-
-        <p>
-            © 2026 ResumeIt. All rights reserved.
-        </p>
-
-
+        <p>&copy; 2026 ResumeIt. All rights reserved.</p>
         <div class="footer-links">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="index.html#features">
-                Features
-            </a>
-
-            <a href="index.html#about">
-                About
-            </a>
-
-            <a href="index.html#contact">
-                Contact
-            </a>
-
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
         </div>
-
     </footer>
 
-
-
-    <!-- ================= JAVASCRIPT ================= -->
-
     <script>
+    function togglePasswordVisibility(inputId, btn) {
+        var input = document.getElementById(inputId);
+        if (!input) return;
+        if (input.type === 'password') {
+            input.type = 'text';
+            btn.textContent = 'Hide';
+        } else {
+            input.type = 'password';
+            btn.textContent = 'Show';
+        }
+    }
 
-        /* Show / Hide Password */
+    function handleLogin(event) {
+        event.preventDefault();
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value;
+        var feedback = document.getElementById('formFeedback');
+        var btn = document.getElementById('submitBtn');
 
-        const password =
-            document.getElementById("password");
+        if (!email || !password) {
+            feedback.textContent = 'Please fill in all fields.';
+            feedback.className = 'form-feedback error';
+            return;
+        }
 
-        const togglePassword =
-            document.getElementById("togglePassword");
+        btn.textContent = 'Signing in...';
+        btn.disabled = true;
 
+        localStorage.setItem('resumeit-user', email);
+        feedback.textContent = 'Signed in successfully! Redirecting...';
+        feedback.className = 'form-feedback success';
 
-        togglePassword.addEventListener(
-            "click",
-            function () {
+        setTimeout(function() {
+            window.location.href = 'dashboard.html';
+        }, 600);
+    }
 
-                if (password.type === "password") {
+    function handleMagicLink() {
+        var email = document.getElementById('email').value.trim();
+        var feedback = document.getElementById('formFeedback');
 
-                    password.type = "text";
+        if (!email) {
+            feedback.textContent = 'Please enter your email address above first.';
+            feedback.className = 'form-feedback error';
+            document.getElementById('email').focus();
+            return;
+        }
 
-                    togglePassword.textContent = "Hide";
+        feedback.textContent = '✉ Magic link sent to ' + email + '! Check your inbox.';
+        feedback.className = 'form-feedback success';
+    }
 
-                } else {
-
-                    password.type = "password";
-
-                    togglePassword.textContent = "Show";
-
-                }
-
-            }
-        );
-
-
-        /* Login */
-
-        const loginForm =
-            document.getElementById("loginForm");
-
-
-        loginForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-                const email =
-                    document.getElementById("email")
-                    .value
-                    .trim();
-
-                const passwordValue =
-                    document.getElementById("password")
-                    .value;
-
-
-                if (
-                    email === "" ||
-                    passwordValue === ""
-                ) {
-
-                    alert(
-                        "Please fill in all fields."
-                    );
-
-                    return;
-
-                }
-
-
-                /*
-                    Backend authentication
-                    will be connected here.
-                */
-
-                alert("Login successful!");
-
-                // Later:
-                // window.location.href =
-                // "dashboard.html";
-
-            }
-        );
-
-
-        /* Magic Link */
-
-        const magicLinkBtn =
-            document.getElementById("magicLinkBtn");
-
-
-        magicLinkBtn.addEventListener(
-            "click",
-            function () {
-
-                const email =
-                    document.getElementById("email")
-                    .value
-                    .trim();
-
-
-                if (email === "") {
-
-                    alert(
-                        "Please enter your email first."
-                    );
-
-                    document
-                        .getElementById("email")
-                        .focus();
-
-                    return;
-
-                }
-
-
-                alert(
-                    "Magic link will be sent to " +
-                    email
-                );
-
-            }
-        );
-
+    /* Theme */
+    (function(){
+        var s = localStorage.getItem('resumeit-theme');
+        if (s === 'light') document.documentElement.setAttribute('data-theme','light');
+        function syncIcons() {
+            var light = document.documentElement.getAttribute('data-theme') === 'light';
+            document.querySelectorAll('.theme-btn').forEach(function(b){
+                b.textContent = light ? '☀️' : '🌙';
+                b.title = light ? 'Switch to dark mode' : 'Switch to light mode';
+            });
+        }
+        window.toggleTheme = function() {
+            var light = document.documentElement.getAttribute('data-theme') === 'light';
+            if (light) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('resumeit-theme','dark'); }
+            else { document.documentElement.setAttribute('data-theme','light'); localStorage.setItem('resumeit-theme','light'); }
+            syncIcons();
+        };
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncIcons);
+        else syncIcons();
+    })();
     </script>
-
-
 </body>
-
 </html>

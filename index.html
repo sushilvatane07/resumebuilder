@@ -2,659 +2,252 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ResumeIt - Build Your Resume</title>
-
+    <meta name="description" content="ResumeIt - Build a clean, ATS-friendly professional resume in minutes with instant live preview. Free and frictionless.">
+    <title>ResumeIt - Free Professional Resume Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script>var _t=localStorage.getItem("resumeit-theme");if(_t==="light")document.documentElement.setAttribute("data-theme","light");</script>
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR  ================= -->
-
+    <!-- ================= NAVBAR ================= -->
     <header class="navbar">
-
         <div class="nav-container">
-
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <span class="logo-box">R</span>
                 ResumeIt
             </a>
 
             <nav class="nav-links">
-
                 <a href="#home">Home</a>
-
+                <a href="#how-it-works">How It Works</a>
                 <a href="#features">Features</a>
-
                 <a href="#about">About</a>
-
-                <a href="#contact">Contact</a>
-
-                <a href="login.html" class="login-nav-btn">
-                    Login
-                    </a>
-
+                <a href="resume-form.html" class="create-nav-btn">Create Resume</a>
+                <a href="login.html" class="login-nav-btn">Login</a>
+                <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light / dark mode">🌙</button>
             </nav>
 
-            <button class="menu-btn" onclick="toggleMenu()">
+            <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="Open menu">
                 ☰
             </button>
-
         </div>
-
     </header>
 
-
     <!-- ================= MOBILE NAV ================= -->
-
     <div class="mobile-menu" id="mobileMenu">
-
         <a href="#home" onclick="closeMenu()">Home</a>
-
+        <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
         <a href="#features" onclick="closeMenu()">Features</a>
-
         <a href="#about" onclick="closeMenu()">About</a>
-
-        <a href="#contact" onclick="closeMenu()">Contact</a>
-
-       <a href="login.html">
-            Login
-        </a>
-
+        <a href="resume-form.html" onclick="closeMenu()">Create Resume</a>
+        <a href="login.html">Login</a>
     </div>
 
-
     <!-- ================= HERO ================= -->
-
     <main>
+        <section class="hero-wrapper" id="home">
+            <div class="hero-bg-overlay"></div>
 
-        <section class="hero" id="home">
+            <div class="hero-glass-card">
+                <div class="hero-pill">
+                    <span class="hero-pill-dot"></span>
+                    Simple • ATS-Optimized • Free Forever
+                </div>
 
-            <div class="hero-content">
-
-                <p class="eyebrow">
-                    SIMPLE • PROFESSIONAL • FAST
-                </p>
-
-                <h1>
+                <h1 class="hero-heading">
                     Create a resume
-                    <span>that represents you.</span>
+                    <span>that gets you hired.</span>
                 </h1>
 
                 <p class="hero-text">
-                    ResumeIt helps you create a clean and professional
-                    resume without complicated editing tools.
-                    Add your information, choose a template and
-                    download your resume.
+                    ResumeIt makes it effortless to build a clean, professional resume in minutes.
+                    Add your experience, watch the live preview update instantly, and download your recruiter-ready PDF.
                 </p>
 
                 <div class="hero-buttons">
-
-                    <a href="login.html" class="primary-btn">
-                        Get Started
+                    <a href="resume-form.html" class="primary-btn">
+                        <span>⚡</span> Build Your Resume — Free
                     </a>
-
-                    <a href="#features" class="secondary-btn">
-                        Explore Features
+                    <a href="#how-it-works" class="secondary-btn">
+                        How It Works ↓
                     </a>
-
                 </div>
 
+                <div class="hero-badges">
+                    <span class="hero-badge">✨ 100% Free to Use</span>
+                    <span class="hero-badge">⚡ Real-Time Live Sync</span>
+                    <span class="hero-badge">📄 Clean PDF Export</span>
+                    <span class="hero-badge">🔒 No Account Required</span>
+                </div>
             </div>
-
-
-            <!-- Resume Preview -->
-
-            <div class="resume-preview">
-
-    <img
-        src="image.png" height="400" width="400"
-        alt="ResumeIt Resume Builder">
-    
-
-              </div>               
-             </div>
-
-            </div>
-
         </section>
 
+        <!-- ================= HOW IT WORKS ================= -->
+        <section class="steps-section" id="how-it-works">
+            <div class="section-heading">
+                <p class="eyebrow">Quick & Effortless</p>
+                <h2>How it works in 3 simple steps</h2>
+                <p>Build your complete resume without wrestling with tricky document formatters.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3>Fill Your Details</h3>
+                    <p>Enter your contact info, employment history, education, and technical skills into organized form tabs.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3>Preview in Real-Time</h3>
+                    <p>Watch your resume adapt on the live A4 paper preview synchronously with every single keystroke you type.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3>Download Clean PDF</h3>
+                    <p>Click export to generate a pixel-perfect, ATS-friendly PDF ready to submit to recruiters immediately.</p>
+                </div>
+            </div>
+        </section>
 
         <!-- ================= FEATURES ================= -->
-
         <section class="features-section" id="features">
-
             <div class="section-heading">
-
-                <p class="eyebrow">
-                    FEATURES
-                </p>
-
-                <h2>
-                    Everything you need to build your resume
-                </h2>
-
-                <p>
-                    Create and manage your professional resume
-                    from one simple platform.
-                </p>
-
+                <p class="eyebrow">Features</p>
+                <h2>Everything you need for a standout resume</h2>
+                <p>Designed from the ground up for modern job seekers and recruiters.</p>
             </div>
-
 
             <div class="features-grid">
-
-
                 <div class="feature-card">
-
-                    <div class="feature-icon">
-                        CV
-                    </div>
-
-                    <h3>
-                        Resume Templates
-                    </h3>
-
-                    <p>
-                        Choose from clean and professional
-                        resume templates.
-                    </p>
-
+                    <div class="feature-icon">📄</div>
+                    <h3>ATS-Friendly Templates</h3>
+                    <p>Clean formatting with proper heading structures that pass Applicant Tracking Systems effortlessly.</p>
                 </div>
 
-
                 <div class="feature-card">
-
-                    <div class="feature-icon">
-                        👤
-                    </div>
-
-                    <h3>
-                        Personal Information
-                    </h3>
-
-                    <p>
-                        Add your name, contact details,
-                        profile and professional summary.
-                    </p>
-
+                    <div class="feature-icon">👤</div>
+                    <h3>Personal Profile & Summary</h3>
+                    <p>Craft a compelling professional overview with your contact links, location, and social profiles.</p>
                 </div>
 
-
                 <div class="feature-card">
-
-                    <div class="feature-icon">
-                        🎓
-                    </div>
-
-                    <h3>
-                        Education
-                    </h3>
-
-                    <p>
-                        Add your educational qualifications
-                        and academic achievements.
-                    </p>
-
+                    <div class="feature-icon">🎓</div>
+                    <h3>Education History</h3>
+                    <p>Add multiple degrees, universities, certifications, and graduation timelines with one click.</p>
                 </div>
 
-
                 <div class="feature-card">
-
-                    <div class="feature-icon">
-                        SK
-                    </div>
-
-                    <h3>
-                        Skills
-                    </h3>
-
-                    <p>
-                        Highlight your technical and
-                        professional skills.
-                    </p>
-
+                    <div class="feature-icon">⚡</div>
+                    <h3>Interactive Skill Tags</h3>
+                    <p>Type comma-separated skills to automatically generate neat, readable skill badge chips.</p>
                 </div>
 
-
                 <div class="feature-card">
-
-                    <div class="feature-icon">
-                        EXP
-                    </div>
-
-                    <h3>
-                        Experience
-                    </h3>
-
-                    <p>
-                        Add your work experience,
-                        internships and achievements.
-                    </p>
-
+                    <div class="feature-icon">💼</div>
+                    <h3>Multi-Job Experience</h3>
+                    <p>Easily document your past roles, internships, and key achievements with dynamic entry blocks.</p>
                 </div>
 
-
                 <div class="feature-card">
-
-                    <div class="feature-icon">
-                        PDF
-                    </div>
-
-                    <h3>
-                        Download as PDF
-                    </h3>
-
-                    <p>
-                        Download your completed resume
-                        as a professional PDF.
-                    </p>
-
+                    <div class="feature-icon">📥</div>
+                    <h3>One-Click PDF Download</h3>
+                    <p>Export high-resolution, print-ready documents formatted strictly for standard resume dimensions.</p>
                 </div>
-
             </div>
-
         </section>
-
 
         <!-- ================= ABOUT ================= -->
-
         <section class="about-section" id="about">
-
             <div>
-
-                <p class="eyebrow">
-                    ABOUT RESUMEIT
-                </p>
-
-                <h2>
-                    Your resume,
-                    made simple.
-                </h2>
-
+                <p class="eyebrow">About ResumeIt</p>
+                <h2>Your career journey, made simple.</h2>
             </div>
-
             <p>
-                ResumeIt is a web application designed to make
-                resume creation simple and accessible. Instead
-                of spending hours formatting a document, users
-                can enter their information and create a
-                professional resume quickly.
+                ResumeIt was built with a simple mission: remove the frustration of creating a job-winning resume.
+                Instead of spending hours aligning margins in word processors, you can focus on showcasing your skills and accomplishments.
             </p>
-
         </section>
 
-
-        <!-- ================= CONTACT ========== -->
-
-        <section class="contact-section" id="contact">
-
-            <div class="section-heading">
-
-                <p class="eyebrow">
-                    CONTACT
-                </p>
-
-                <h2>
-                    Need help?
-                </h2>
-
-                <p>
-                    Have a question about ResumeIt?
-                    Get in touch with us.
-                </p>
-
+        <!-- ================= CTA BANNER ================= -->
+        <section class="cta-section">
+            <div class="cta-card">
+                <h2>Ready to build your next resume?</h2>
+                <p>Start right now in your browser. No credit card, no sign-up wall, completely free.</p>
+                <div class="cta-actions">
+                    <a href="resume-form.html" class="primary-btn">
+                        Create Your Resume Now →
+                    </a>
+                </div>
             </div>
-
-            <a href="mailto:support@resumeit.com" class="contact-btn">
-                Contact Us
-            </a>
-
         </section>
 
+        <!-- ================= CONTACT ================= -->
+        <section class="contact-section" id="contact">
+            <div class="section-heading">
+                <p class="eyebrow">Contact</p>
+                <h2>Have questions or suggestions?</h2>
+                <p>
+                    We'd love to hear from you. Get in touch with our team anytime.
+                </p>
+            </div>
+            <a href="mailto:support@resumeit.com" class="contact-btn">
+                ✉ Contact Us
+            </a>
+        </section>
     </main>
 
-
     <!-- ================= FOOTER ================= -->
-
     <footer class="footer">
-
         <div class="footer-container">
-
-
             <div class="footer-brand">
-
-                <a href="#" class="logo">
+                <a href="index.html" class="logo">
                     <span class="logo-box">R</span>
                     ResumeIt
                 </a>
-
                 <p>
-                    Create a professional resume,
-                    simply and quickly.
+                    Build and download clean, professional resumes in minutes with zero friction.
                 </p>
-
             </div>
-
 
             <div class="footer-links">
-
                 <div>
-
-                    <h3>
-                        Important Links
-                    </h3>
-
-                    <a href="#home">
-                        Home
-                    </a>
-
-                    <a href="#features">
-                        Features
-                    </a>
-
-                    <a href="#about">
-                        About
-                    </a>
-
-                    <a href="#contact">
-                        Contact Us
-                    </a>
-
+                    <h3>Navigation</h3>
+                    <a href="#home">Home</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#features">Features</a>
+                    <a href="#about">About</a>
                 </div>
 
-
                 <div>
-
-                    <h3>
-                        Account
-                    </h3>
-
-                    <a href="login.html">
-                        Login
-                    </a>
-
-                    <a href="register.html">
-                        Create Account
-                    </a>
+                    <h3>Builder</h3>
+                    <a href="resume-form.html">Create Resume</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Create Account</a>
                 </div>
 
-
                 <div>
-
-                    <h3>
-                        Legal
-                    </h3>
-
-                    <a href="#">
-                        Privacy Policy
-                    </a>
-
-                    <a href="#">
-                        Terms & Conditions
-                    </a>
-
+                    <h3>Legal</h3>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms &amp; Conditions</a>
                 </div>
-
             </div>
-
         </div>
-
 
         <div class="footer-bottom">
-
-            <p>
-                © 2026 ResumeIt. All rights reserved.
-            </p>
-
+            <p>&copy; 2026 ResumeIt. All rights reserved.</p>
         </div>
-
     </footer>
 
-
-    <!-- ================= LOGIN MODAL ================= -->
-
-    <div class="modal-overlay" id="authModal">
-
-        <div class="auth-modal">
-
-            <button class="close-btn" onclick="closeLogin()">
-                ×
-            </button>
-
-
-            <!-- LOGIN -->
-
-            <div id="loginForm">
-
-                <div class="form-header">
-
-                    <h2>
-                        Welcome back
-                    </h2>
-
-                    <p>
-                        Sign in to continue to ResumeIt.
-                    </p>
-
-                </div>
-
-
-                <form onsubmit="login(event)">
-
-                    <div class="input-group">
-
-                        <label>
-                            Email
-                        </label>
-
-                        <input
-                            type="email"
-                            id="loginEmail"
-                            placeholder="you@example.com"
-                            required
-                        >
-
-                    </div>
-
-
-                    <div class="input-group">
-
-                        <label>
-                            Password
-                        </label>
-
-                        <div class="password-box">
-
-                            <input
-                                type="password"
-                                id="loginPassword"
-                                placeholder="Enter your password"
-                                required
-                            >
-
-                            <button
-                                type="button"
-                                onclick="togglePassword('loginPassword', this)"
-                            >
-                                Show
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <button class="submit-btn">
-                        Login
-                    </button>
-
-                </form>
-
-
-                <div class="divider">
-                    <span>OR</span>
-                </div>
-
-
-                <button class="magic-btn" onclick="magicLink()">
-
-                    ✉
-
-                    Continue with Magic Link
-
-                </button>
-
-
-                <p class="switch-text">
-
-                    Don't have an account?
-
-                    <button onclick="openSignup()">
-                        Create account
-                    </button>
-
-                </p>
-
-            </div>
-
-
-            <!-- SIGNUP -->
-
-            <div id="signupForm" class="hidden">
-
-                <div class="form-header">
-
-                    <h2>
-                        Create account
-                    </h2>
-
-                    <p>
-                        Start building your resume today.
-                    </p>
-
-                </div>
-
-
-                <form onsubmit="signup(event)">
-
-                    <div class="input-group">
-
-                        <label>
-                            Full name
-                        </label>
-
-                        <input
-                            type="text"
-                            id="name"
-                            placeholder="Your full name"
-                            required
-                        >
-
-                    </div>
-
-
-                    <div class="input-group">
-
-                        <label>
-                            Email
-                        </label>
-
-                        <input
-                            type="email"
-                            id="signupEmail"
-                            placeholder="you@example.com"
-                            required
-                        >
-
-                    </div>
-
-
-                    <div class="input-group">
-
-                        <label>
-                            Password
-                        </label>
-
-                        <div class="password-box">
-
-                            <input
-                                type="password"
-                                id="signupPassword"
-                                placeholder="Create a password"
-                                required
-                            >
-
-                            <button
-                                type="button"
-                                onclick="togglePassword('signupPassword', this)"
-                            >
-                                Show
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="input-group">
-
-                        <label>
-                            Confirm password
-                        </label>
-
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            placeholder="Confirm your password"
-                            required
-                        >
-
-                    </div>
-
-
-                    <button class="submit-btn">
-                        Create account
-                    </button>
-
-                </form>
-
-
-                <div class="divider">
-                    <span>OR</span>
-                </div>
-
-
-                <button class="magic-btn" onclick="magicLink()">
-
-                    ✉
-
-                    Continue with Magic Link
-
-                </button>
-
-
-                <p class="switch-text">
-
-                    Already have an account?
-
-                    <button onclick="openLogin()">
-                        Login
-                    </button>
-
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
     <script src="js/script.js"></script>
-
+    <script src="js/theme.js"></script>
 </body>
-
 </html>

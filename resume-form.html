@@ -2,1453 +2,1028 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Build and preview your professional resume in real time with ResumeIt.">
     <title>ResumeIt - Create Resume</title>
-
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>var _t=localStorage.getItem("resumeit-theme");if(_t==="light")document.documentElement.setAttribute("data-theme","light");</script>
     <style>
 
-        /* =====================================
-           COLOR VARIABLES
-        ===================================== */
-
+        /* ===== VARIABLES ===== */
         :root {
-
             --bg: #111111;
             --surface: #181818;
-            --surface-light: #202020;
-
-            --text: #f5f5f5;
-            --text-muted: #999999;
-
-            --border: #303030;
-
-            --input-bg: #121212;
-
-            --button: #f5f5f5;
+            --surface-light: #222222;
+            --surface-hover: #282828;
+            --text: #f0f0f0;
+            --text-muted: #888888;
+            --text-dim: #555555;
+            --border: #2a2a2a;
+            --border-hover: #444444;
+            --button: #f0f0f0;
             --button-text: #111111;
-
+            --button-hover: #d8d8d8;
+            --input-bg: #0d0d0d;
+            --preview-bg: #0a0a0a;
             --resume-bg: #ffffff;
-            --resume-text: #222222;
-            --resume-muted: #666666;
-
+            --resume-text: #1a1a1a;
+            --resume-muted: #555555;
+            --resume-border: #dddddd;
+            --accent: #4a9eff;
+        }
+        [data-theme="light"] {
+            --bg: #f8f8f8;
+            --surface: #ffffff;
+            --surface-light: #f0f0f0;
+            --surface-hover: #e8e8e8;
+            --text: #111111;
+            --text-muted: #666666;
+            --text-dim: #aaaaaa;
+            --border: #e0e0e0;
+            --border-hover: #b0b0b0;
+            --button: #111111;
+            --button-text: #f8f8f8;
+            --button-hover: #333333;
+            --input-bg: #f4f4f4;
+            --preview-bg: #e8e8e8;
         }
 
-
-        /* =====================================
-           RESET
-        ===================================== */
-
-        * {
-
-            margin: 0;
-            padding: 0;
-
-            box-sizing: border-box;
-
-        }
-
-
+        /* ===== RESET ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-
-            min-height: 100vh;
-
-            font-family: Arial, Helvetica, sans-serif;
-
+            font-family: 'Inter', Arial, sans-serif;
             background: var(--bg);
-
             color: var(--text);
-
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
         }
+        a { color: inherit; text-decoration: none; }
+        button, input, textarea, select { font-family: inherit; }
 
-
-        a {
-
-            color: inherit;
-
-            text-decoration: none;
-
-        }
-
-
-        button,
-        input,
-        textarea,
-        select {
-
-            font-family: inherit;
-
-        }
-
-
-        /* =====================================
-           NAVBAR
-        ===================================== */
-
+        /* ===== NAVBAR ===== */
         .navbar {
-
-            height: 70px;
-
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: 62px;
             border-bottom: 1px solid var(--border);
-
-            background: var(--bg);
-
+            background: rgba(17,17,17,0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
-            padding: 0 30px;
-
+            padding: 0 24px;
+            transition: background 0.3s ease;
         }
-
-
+        [data-theme="light"] .navbar {
+            background: rgba(248,248,248,0.92);
+        }
         .logo {
-
             display: flex;
-
             align-items: center;
-
-            gap: 10px;
-
-            font-size: 18px;
-
-            font-weight: bold;
-
+            gap: 9px;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            transition: opacity 0.2s ease;
         }
-
-
+        .logo:hover { opacity: 0.75; }
         .logo-box {
-
-            width: 35px;
-
-            height: 35px;
-
+            width: 30px; height: 30px;
             border: 1px solid var(--border);
-
             border-radius: 6px;
-
             background: var(--surface);
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 700;
         }
-
-
         .nav-right {
-
             display: flex;
-
             align-items: center;
-
-            gap: 25px;
-
+            gap: 10px;
         }
-
-
         .nav-link {
-
             color: var(--text-muted);
-
             font-size: 12px;
-
-        }
-
-
-        .nav-link:hover {
-
-            color: var(--text);
-
-        }
-
-
-        .download-btn {
-
-            border: none;
-
-            background: var(--button);
-
-            color: var(--button-text);
-
-            padding: 11px 18px;
-
+            font-weight: 500;
+            padding: 6px 10px;
             border-radius: 5px;
-
-            font-size: 11px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
+            transition: color 0.2s ease, background 0.2s ease;
         }
+        .nav-link:hover { color: var(--text); background: var(--surface-light); }
 
-
-        .download-btn:hover {
-
-            background: #dddddd;
-
-        }
-
-
-        /* =====================================
-           PAGE HEADER
-        ===================================== */
-
-        .page-header {
-
-            padding: 25px 30px;
-
-            border-bottom: 1px solid var(--border);
-
-        }
-
-
-        .page-header h1 {
-
-            font-size: 24px;
-
-            margin-bottom: 6px;
-
-        }
-
-
-        .page-header p {
-
-            color: var(--text-muted);
-
-            font-size: 12px;
-
-        }
-
-
-        /* =====================================
-           MAIN BUILDER
-           50% LEFT + 50% RIGHT
-        ===================================== */
-
-        .builder {
-
-            width: 100%;
-
-            min-height: calc(100vh - 140px);
-
-            display: grid;
-
-            grid-template-columns: 50% 50%;
-
-        }
-
-
-        /* =====================================
-           LEFT FORM SECTION
-        ===================================== */
-
-        .form-section {
-
-            padding: 30px;
-
-            border-right: 1px solid var(--border);
-
-            background: var(--bg);
-
-        }
-
-
-        .section-title {
-
-            font-size: 16px;
-
-            margin-bottom: 5px;
-
-        }
-
-
-        .section-description {
-
-            color: var(--text-muted);
-
-            font-size: 11px;
-
-            margin-bottom: 25px;
-
-        }
-
-
-        /* =====================================
-           FORM CARD
-        ===================================== */
-
-        .form-card {
-
-            background: var(--surface);
-
+        /* Theme btn */
+        .theme-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px;
             border: 1px solid var(--border);
-
             border-radius: 7px;
-
-            padding: 22px;
-
-            margin-bottom: 20px;
-
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer; font-size: 15px; line-height: 1; padding: 0;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.18s ease;
         }
+        .theme-btn:hover { background: var(--surface-light); border-color: var(--border-hover);}
 
-
-        .form-card h2 {
-
-            font-size: 14px;
-
-            margin-bottom: 18px;
-
+        /* Download btn */
+        .download-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            border: none;
+            background: var(--button);
+            color: var(--button-text);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.15s ease;
         }
+        .download-btn:hover { background: var(--button-hover); transform: translateY(-1px); }
+        .download-btn:active { transform: translateY(0); }
 
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .page-header h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.4px; }
+        .page-header p { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
 
-        /* =====================================
-           INPUT GROUP
-        ===================================== */
+        /* Save status indicator */
+        .save-status {
+            font-size: 11px;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        .save-status.saved { color: #4caf7d; }
 
-        .form-row {
-
+        /* ===== BUILDER LAYOUT ===== */
+        .builder {
             display: grid;
-
             grid-template-columns: 1fr 1fr;
-
-            gap: 15px;
-
+            min-height: calc(100vh - 120px);
         }
 
+        /* ===== LEFT FORM SECTION ===== */
+        .form-section {
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            max-height: calc(100vh - 125px);
+        }
+        .form-inner {
+            padding: 24px;
+        }
 
-        .input-group {
+        /* Form tabs */
+        .form-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .form-tab {
+            padding: 7px 13px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            transition: all 0.15s ease;
+        }
+        .form-tab.active {
+            background: var(--surface-light);
+            border-color: var(--border-hover);
+            color: var(--text);
+        }
+        .form-tab:hover { color: var(--text); border-color: var(--border-hover); }
 
+        /* Tab panels */
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* ===== FORM CARD ===== */
+        .form-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 14px;
+        }
+        .form-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 16px;
-
+        }
+        .form-card-header h2 {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: -0.1px;
         }
 
-
+        /* ===== INPUT STYLES ===== */
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .input-group { margin-bottom: 13px; }
+        .input-group:last-child { margin-bottom: 0; }
         .input-group label {
-
             display: block;
-
-            margin-bottom: 7px;
-
             font-size: 10px;
-
-            font-weight: bold;
-
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+            text-transform: uppercase;
         }
-
-
         .input-group input,
         .input-group textarea,
         .input-group select {
-
             width: 100%;
-
             background: var(--input-bg);
-
             border: 1px solid var(--border);
-
             border-radius: 5px;
-
             color: var(--text);
-
             outline: none;
-
-            font-size: 11px;
-
-            padding: 11px;
-
+            font-size: 12px;
+            padding: 9px 11px;
+            transition: border-color 0.2s ease;
         }
-
-
-        .input-group input {
-
-            height: 42px;
-
-        }
-
-
-        .input-group textarea {
-
-            min-height: 90px;
-
-            resize: vertical;
-
-        }
-
-
+        .input-group input { height: 38px; }
+        .input-group textarea { min-height: 80px; resize: vertical; line-height: 1.6; }
         .input-group input:focus,
         .input-group textarea:focus,
-        .input-group select:focus {
-
-            border-color: #666666;
-
-        }
-
-
+        .input-group select:focus { border-color: var(--border-hover); }
         .input-group input::placeholder,
-        .input-group textarea::placeholder {
+        .input-group textarea::placeholder { color: var(--text-dim); }
 
-            color: #666666;
-
-        }
-
-
-        /* =====================================
-           SAVE BUTTON
-        ===================================== */
-
-        .save-btn {
-
-            width: 100%;
-
-            height: 44px;
-
+        /* ===== ENTRY BLOCK (dynamic sections) ===== */
+        .entry-block {
             border: 1px solid var(--border);
-
-            border-radius: 5px;
-
-            background: var(--surface-light);
-
-            color: var(--text);
-
-            font-size: 11px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
+            border-radius: 7px;
+            padding: 14px;
+            margin-bottom: 12px;
+            background: var(--bg);
+            position: relative;
         }
-
-
-        .save-btn:hover {
-
-            background: #292929;
-
-        }
-
-
-        /* =====================================
-           RIGHT PREVIEW SECTION
-        ===================================== */
-
-        .preview-section {
-
-            background: #0d0d0d;
-
-            padding: 30px;
-
-            overflow: auto;
-
-        }
-
-
-        .preview-header {
-
+        .entry-block-header {
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
-            margin-bottom: 20px;
-
+            margin-bottom: 12px;
         }
-
-
-        .preview-header h2 {
-
-            font-size: 16px;
-
-        }
-
-
-        .preview-header span {
-
+        .entry-label {
+            font-size: 11px;
+            font-weight: 600;
             color: var(--text-muted);
-
-            font-size: 10px;
-
         }
+        .remove-btn {
+            border: 1px solid var(--border);
+            background: transparent;
+            color: #e05555;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 9px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s, border-color 0.15s;
+        }
+        .remove-btn:hover { background: rgba(224, 85, 85, 0.15); border-color: #e05555; }
 
-
-        /* =====================================
-           RESUME PAPER
-        ===================================== */
-
-        .resume-paper {
-
+        /* Add more button */
+        .add-btn {
             width: 100%;
+            border: 1px dashed var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s, background 0.2s;
+            margin-top: 4px;
+        }
+        .add-btn:hover { border-color: var(--border-hover); color: var(--text); background: var(--surface-hover); }
 
-            max-width: 700px;
-
-            min-height: 900px;
-
-            margin: 0 auto;
-
-            padding: 50px;
-
-            background: var(--resume-bg);
-
-            color: var(--resume-text);
-
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-
+        /* ===== SKILLS TAG INPUT ===== */
+        .skills-hint {
+            color: var(--text-dim);
+            font-size: 11px;
+            margin-top: 6px;
         }
 
-
-        /* =====================================
-           RESUME HEADER
-        ===================================== */
-
-        .resume-header {
-
-            padding-bottom: 20px;
-
-            border-bottom: 2px solid #222222;
-
-            margin-bottom: 25px;
-
-        }
-
-
-        .resume-name {
-
-            font-size: 30px;
-
-            margin-bottom: 6px;
-
-        }
-
-
-        .resume-job {
-
-            font-size: 13px;
-
-            color: var(--resume-muted);
-
-            margin-bottom: 12px;
-
-        }
-
-
-        .resume-contact {
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 15px;
-
-            font-size: 9px;
-
-            color: var(--resume-muted);
-
-        }
-
-
-        /* =====================================
-           RESUME SECTIONS
-        ===================================== */
-
-        .resume-section {
-
-            margin-bottom: 24px;
-
-        }
-
-
-        .resume-section h2 {
-
+        /* ===== SAVE BUTTON ===== */
+        .save-btn {
+            width: 100%;
+            height: 40px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--surface-light);
+            color: var(--text);
             font-size: 12px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 1.5px;
-
-            margin-bottom: 10px;
-
-            padding-bottom: 5px;
-
-            border-bottom: 1px solid #dddddd;
-
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s ease, border-color 0.2s ease;
         }
+        .save-btn:hover { background: var(--surface-hover); border-color: var(--border-hover); }
 
-
-        .resume-section p {
-
-            font-size: 10px;
-
-            line-height: 1.7;
-
-            color: #444444;
-
+        /* ===== RIGHT PREVIEW SECTION ===== */
+        .preview-section {
+            background: var(--preview-bg);
+            padding: 24px;
+            overflow-y: auto;
+            max-height: calc(100vh - 125px);
         }
-
-
-        /* =====================================
-           EDUCATION / EXPERIENCE
-        ===================================== */
-
-        .resume-item {
-
-            margin-bottom: 15px;
-
-        }
-
-
-        .resume-item h3 {
-
-            font-size: 11px;
-
-            margin-bottom: 3px;
-
-        }
-
-
-        .resume-item .company {
-
-            font-size: 10px;
-
-            color: var(--resume-muted);
-
-            margin-bottom: 4px;
-
-        }
-
-
-        .resume-item .date {
-
-            font-size: 9px;
-
-            color: #888888;
-
-            margin-bottom: 6px;
-
-        }
-
-
-        /* =====================================
-           SKILLS
-        ===================================== */
-
-        .skills {
-
+        .preview-header {
             display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 7px;
-
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .preview-header h2 { font-size: 13px; font-weight: 600; }
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #4caf7d;
+        }
+        .live-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #4caf7d;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
-
-        .skill {
-
-            border: 1px solid #cccccc;
-
-            padding: 5px 9px;
-
-            font-size: 9px;
-
-            border-radius: 3px;
-
+        /* ===== RESUME PAPER ===== */
+        .resume-paper {
+            width: 100%;
+            max-width: 680px;
+            margin: 0 auto;
+            background: var(--resume-bg);
+            color: var(--resume-text);
+            padding: 48px 50px;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+            border-radius: 2px;
+            min-height: 860px;
+            font-family: 'Inter', Arial, sans-serif;
+            transition: box-shadow 0.3s ease;
         }
 
+        /* Resume Header */
+        .resume-header { border-bottom: 2px solid #1a1a1a; padding-bottom: 18px; margin-bottom: 22px; }
+        .r-name { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; color: #111; }
+        .r-title { font-size: 13px; color: #555; margin-bottom: 10px; }
+        .r-contact {
+            display: flex; flex-wrap: wrap; gap: 14px;
+            font-size: 10px; color: #666;
+        }
+        .r-contact span { display: flex; align-items: center; gap: 3px; }
 
-        /* =====================================
-           PROJECTS
-        ===================================== */
-
-        .project-item {
-
+        /* Resume Section */
+        .r-section { margin-bottom: 20px; }
+        .r-section-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
             margin-bottom: 12px;
-
         }
-
-
-        .project-item h3 {
-
+        .r-section p {
             font-size: 11px;
-
-            margin-bottom: 4px;
-
+            line-height: 1.75;
+            color: #444;
         }
 
+        /* Resume Items (edu / exp) */
+        .r-item { margin-bottom: 13px; }
+        .r-item:last-child { margin-bottom: 0; }
+        .r-item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2px; }
+        .r-item h3 { font-size: 12px; font-weight: 600; color: #111; }
+        .r-item .r-date { font-size: 10px; color: #888; white-space: nowrap; margin-left: 8px; }
+        .r-item .r-sub { font-size: 11px; color: #555; margin-bottom: 4px; }
+        .r-item .r-desc { font-size: 10px; color: #444; line-height: 1.7; }
 
-        /* =====================================
-           RESPONSIVE
-        ===================================== */
-
-        @media (max-width: 1000px) {
-
-            .builder {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-            .form-section {
-
-                border-right: none;
-
-                border-bottom: 1px solid var(--border);
-
-            }
-
-
-            .preview-section {
-
-                min-height: 1000px;
-
-            }
-
+        /* Skills */
+        .r-skills { display: flex; flex-wrap: wrap; gap: 6px; }
+        .r-skill {
+            border: 1px solid #ccc;
+            padding: 3px 9px;
+            font-size: 10px;
+            border-radius: 3px;
+            color: #333;
+            background: #fafafa;
         }
 
+        /* Placeholder text style in preview */
+        .r-placeholder { color: #bbb !important; font-style: italic; }
 
-        @media (max-width: 600px) {
-
-            .navbar {
-
-                height: auto;
-
-                padding: 15px 18px;
-
-                gap: 15px;
-
-                flex-wrap: wrap;
-
-            }
-
-
-            .nav-right {
-
-                gap: 12px;
-
-            }
-
-
-            .nav-link {
-
-                font-size: 10px;
-
-            }
-
-
-            .page-header {
-
-                padding: 20px;
-
-            }
-
-
-            .form-section {
-
-                padding: 20px;
-
-            }
-
-
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            body { background: white !important; }
+            .navbar, .page-header, .form-section, .preview-header { display: none !important; }
+            .builder { display: block !important; height: auto !important; }
             .preview-section {
-
-                padding: 20px;
-
+                background: white !important;
+                padding: 0 !important;
+                height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
             }
-
-
-            .form-row {
-
-                grid-template-columns: 1fr;
-
-                gap: 0;
-
-            }
-
-
             .resume-paper {
-
-                padding: 30px 25px;
-
+                box-shadow: none !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                min-height: auto !important;
+                border-radius: 0 !important;
             }
+        }
 
-
-            .resume-name {
-
-                font-size: 24px;
-
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .builder { grid-template-columns: 1fr; }
+            .form-section, .preview-section {
+                max-height: none;
+                height: auto;
+                overflow-y: visible;
             }
-
+            .preview-section { border-top: 1px solid var(--border); }
+        }
+        @media (max-width: 600px) {
+            .navbar { padding: 0 16px; }
+            .form-inner, .preview-section { padding: 16px; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .resume-paper { padding: 28px 22px; }
+            .r-name { font-size: 22px; }
         }
 
     </style>
-
 </head>
-
 
 <body>
 
-
-    <!-- =====================================
-         NAVBAR
-    ===================================== -->
-
+    <!-- NAVBAR -->
     <header class="navbar">
-
         <a href="dashboard.html" class="logo">
-
-            <span class="logo-box">
-                R
-            </span>
-
-            <span>
-                ResumeIt
-            </span>
-
+            <span class="logo-box">R</span>
+            ResumeIt
         </a>
-
-
         <div class="nav-right">
-
-            <a href="dashboard.html" class="nav-link">
-                Dashboard
-            </a>
-
-            <a href="dashboard.html" class="nav-link">
-                Templates
-            </a>
-
-            <a href="index.html" class="nav-link">
-                Logout
-            </a>
-
-            <button class="download-btn">
-                Download PDF
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="index.html" class="nav-link">Logout</a>
+            <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light / dark mode">🌙</button>
+            <button class="download-btn" onclick="downloadPDF()">
+                📄 Download PDF
             </button>
-
         </div>
-
     </header>
 
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div>
+            <h1>Resume Builder</h1>
+            <p>Fill in your details — the live preview updates synchronously.</p>
+        </div>
+        <div class="save-status" id="saveStatus">Auto-saved ✓</div>
+    </div>
 
-
-    <!-- =====================================
-         PAGE HEADER
-    ===================================== -->
-
-    <section class="page-header">
-
-        <h1>
-            Create Your Resume
-        </h1>
-
-        <p>
-            Enter your information and preview your
-            professional resume.
-        </p>
-
-    </section>
-
-
-
-    <!-- =====================================
-         BUILDER
-    ===================================== -->
-
+    <!-- BUILDER -->
     <main class="builder">
 
-
-        <!-- =================================
-             LEFT SIDE - FORM
-        ================================= -->
-
+        <!-- LEFT — FORM -->
         <section class="form-section">
+            <div class="form-inner">
 
-
-            <h2 class="section-title">
-                Resume Information
-            </h2>
-
-            <p class="section-description">
-                Fill in your details to create your resume.
-            </p>
-
-
-
-            <!-- =============================
-                 PERSONAL INFORMATION
-            ============================== -->
-
-            <div class="form-card">
-
-                <h2>
-                    Personal Information
-                </h2>
-
-
-                <div class="form-row">
-
-
-                    <div class="input-group">
-
-                        <label for="fullName">
-                            Full Name
-                        </label>
-
-                        <input
-                            type="text"
-                            id="fullName"
-                            placeholder="Enter your full name"
-                        >
-
-                    </div>
-
-
-                    <div class="input-group">
-
-                        <label for="jobTitle">
-                            Job Title
-                        </label>
-
-                        <input
-                            type="text"
-                            id="jobTitle"
-                            placeholder="e.g. Software Developer"
-                        >
-
-                    </div>
-
+                <!-- Tab navigation -->
+                <div class="form-tabs" id="formTabs">
+                    <button class="form-tab active" onclick="switchTab('personal')">Personal</button>
+                    <button class="form-tab" onclick="switchTab('education')">Education</button>
+                    <button class="form-tab" onclick="switchTab('skills')">Skills</button>
+                    <button class="form-tab" onclick="switchTab('experience')">Experience</button>
+                    <button class="form-tab" onclick="switchTab('projects')">Projects</button>
                 </div>
 
-
-
-                <div class="form-row">
-
-
-                    <div class="input-group">
-
-                        <label for="email">
-                            Email
-                        </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="your@email.com"
-                        >
-
+                <!-- Personal Tab -->
+                <div class="tab-panel active" id="tab-personal">
+                    <div class="form-card">
+                        <div class="form-card-header"><h2>Personal Information</h2></div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Full Name</label>
+                                <input type="text" id="f-name" placeholder="Your full name" oninput="updateField('name', this.value)">
+                            </div>
+                            <div class="input-group">
+                                <label>Job Title</label>
+                                <input type="text" id="f-title" placeholder="e.g. Software Developer" oninput="updateField('title', this.value)">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Email</label>
+                                <input type="email" id="f-email" placeholder="your@email.com" autocomplete="email" oninput="updateField('email', this.value)">
+                            </div>
+                            <div class="input-group">
+                                <label>Phone</label>
+                                <input type="tel" id="f-phone" placeholder="+91 98765 43210" oninput="updateField('phone', this.value)">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Location</label>
+                                <input type="text" id="f-location" placeholder="City, Country" oninput="updateField('location', this.value)">
+                            </div>
+                            <div class="input-group">
+                                <label>Website / LinkedIn</label>
+                                <input type="text" id="f-website" placeholder="linkedin.com/in/you" oninput="updateField('website', this.value)">
+                            </div>
+                        </div>
                     </div>
 
-
-                    <div class="input-group">
-
-                        <label for="phone">
-                            Phone
-                        </label>
-
-                        <input
-                            type="tel"
-                            id="phone"
-                            placeholder="Enter phone number"
-                        >
-
+                    <div class="form-card">
+                        <div class="form-card-header"><h2>Professional Summary</h2></div>
+                        <div class="input-group">
+                            <label>About You</label>
+                            <textarea id="f-summary" placeholder="Write a short professional summary about yourself, your experience and goals..." oninput="updateField('summary', this.value)"></textarea>
+                        </div>
                     </div>
 
+                    <button class="save-btn" onclick="saveResume()">💾 Save Resume</button>
                 </div>
 
+                <!-- Education Tab -->
+                <div class="tab-panel" id="tab-education">
+                    <div class="form-card">
+                        <div class="form-card-header"><h2>Education</h2></div>
+                        <div id="edu-entries"></div>
+                        <button class="add-btn" onclick="addEntry('education')">+ Add Education</button>
+                    </div>
+                    <button class="save-btn" onclick="saveResume()">💾 Save Resume</button>
+                </div>
 
+                <!-- Skills Tab -->
+                <div class="tab-panel" id="tab-skills">
+                    <div class="form-card">
+                        <div class="form-card-header"><h2>Skills</h2></div>
+                        <div class="input-group">
+                            <label>Skills (comma-separated)</label>
+                            <textarea id="f-skills" placeholder="HTML, CSS, JavaScript, React, Python, SQL..." oninput="updateField('skills', this.value)"></textarea>
+                            <p class="skills-hint">Separate each skill with a comma. They will appear as neat tags in the resume.</p>
+                        </div>
+                    </div>
+                    <button class="save-btn" onclick="saveResume()">💾 Save Resume</button>
+                </div>
 
-                <div class="input-group">
+                <!-- Experience Tab -->
+                <div class="tab-panel" id="tab-experience">
+                    <div class="form-card">
+                        <div class="form-card-header"><h2>Work Experience</h2></div>
+                        <div id="exp-entries"></div>
+                        <button class="add-btn" onclick="addEntry('experience')">+ Add Experience</button>
+                    </div>
+                    <button class="save-btn" onclick="saveResume()">💾 Save Resume</button>
+                </div>
 
-                    <label for="location">
-                        Location
-                    </label>
-
-                    <input
-                        type="text"
-                        id="location"
-                        placeholder="City, Country"
-                    >
-
+                <!-- Projects Tab -->
+                <div class="tab-panel" id="tab-projects">
+                    <div class="form-card">
+                        <div class="form-card-header"><h2>Projects</h2></div>
+                        <div id="proj-entries"></div>
+                        <button class="add-btn" onclick="addEntry('projects')">+ Add Project</button>
+                    </div>
+                    <button class="save-btn" onclick="saveResume()">💾 Save Resume</button>
                 </div>
 
             </div>
-
-
-
-            <!-- =============================
-                 PROFESSIONAL SUMMARY
-            ============================== -->
-
-            <div class="form-card">
-
-                <h2>
-                    Professional Summary
-                </h2>
-
-
-                <div class="input-group">
-
-                    <label for="summary">
-                        About You
-                    </label>
-
-                    <textarea
-                        id="summary"
-                        placeholder="Write a short professional summary..."
-                    ></textarea>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =============================
-                 EDUCATION
-            ============================== -->
-
-            <div class="form-card">
-
-                <h2>
-                    Education
-                </h2>
-
-
-                <div class="input-group">
-
-                    <label for="degree">
-                        Degree / Course
-                    </label>
-
-                    <input
-                        type="text"
-                        id="degree"
-                        placeholder="e.g. Bachelor of Computer Science"
-                    >
-
-                </div>
-
-
-                <div class="input-group">
-
-                    <label for="college">
-                        College / University
-                    </label>
-
-                    <input
-                        type="text"
-                        id="college"
-                        placeholder="Enter college name"
-                    >
-
-                </div>
-
-
-                <div class="form-row">
-
-
-                    <div class="input-group">
-
-                        <label for="educationStart">
-                            Start Year
-                        </label>
-
-                        <input
-                            type="text"
-                            id="educationStart"
-                            placeholder="2023"
-                        >
-
-                    </div>
-
-
-                    <div class="input-group">
-
-                        <label for="educationEnd">
-                            End Year
-                        </label>
-
-                        <input
-                            type="text"
-                            id="educationEnd"
-                            placeholder="2026"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =============================
-                 SKILLS
-            ============================== -->
-
-            <div class="form-card">
-
-                <h2>
-                    Skills
-                </h2>
-
-
-                <div class="input-group">
-
-                    <label for="skills">
-                        Skills
-                    </label>
-
-                    <textarea
-                        id="skills"
-                        placeholder="HTML, CSS, JavaScript, Python..."
-                    ></textarea>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =============================
-                 EXPERIENCE
-            ============================== -->
-
-            <div class="form-card">
-
-                <h2>
-                    Experience
-                </h2>
-
-
-                <div class="input-group">
-
-                    <label for="experienceTitle">
-                        Job Title
-                    </label>
-
-                    <input
-                        type="text"
-                        id="experienceTitle"
-                        placeholder="e.g. Web Developer Intern"
-                    >
-
-                </div>
-
-
-                <div class="input-group">
-
-                    <label for="company">
-                        Company
-                    </label>
-
-                    <input
-                        type="text"
-                        id="company"
-                        placeholder="Enter company name"
-                    >
-
-                </div>
-
-
-                <div class="input-group">
-
-                    <label for="experienceDescription">
-                        Description
-                    </label>
-
-                    <textarea
-                        id="experienceDescription"
-                        placeholder="Describe your responsibilities..."
-                    ></textarea>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =============================
-                 PROJECTS
-            ============================== -->
-
-            <div class="form-card">
-
-                <h2>
-                    Projects
-                </h2>
-
-
-                <div class="input-group">
-
-                    <label for="projectName">
-                        Project Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="projectName"
-                        placeholder="Enter project name"
-                    >
-
-                </div>
-
-
-                <div class="input-group">
-
-                    <label for="projectDescription">
-                        Project Description
-                    </label>
-
-                    <textarea
-                        id="projectDescription"
-                        placeholder="Describe your project..."
-                    ></textarea>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =============================
-                 SAVE BUTTON
-            ============================== -->
-
-            <button class="save-btn">
-
-                Save Resume
-
-            </button>
-
-
         </section>
 
 
-
-        <!-- =================================
-             RIGHT SIDE - PREVIEW
-        ================================= -->
-
+        <!-- RIGHT — LIVE PREVIEW -->
         <section class="preview-section">
 
-
             <div class="preview-header">
-
-                <h2>
-                    Resume Preview
-                </h2>
-
-                <span>
-                    Live Preview
-                </span>
-
+                <h2>Live Preview</h2>
+                <div class="live-badge"><span class="live-dot"></span> Live</div>
             </div>
 
-
-
-            <!-- =================================
-                 RESUME PAPER
-            ================================= -->
-
-            <div class="resume-paper">
-
+            <div class="resume-paper" id="resumePaper">
 
                 <!-- RESUME HEADER -->
-
                 <div class="resume-header">
-
-                    <h1 class="resume-name">
-                        Your Name
-                    </h1>
-
-                    <p class="resume-job">
-                        Your Professional Title
-                    </p>
-
-
-                    <div class="resume-contact">
-
-                        <span>
-                            your@email.com
-                        </span>
-
-                        <span>
-                            +91 XXXXX XXXXX
-                        </span>
-
-                        <span>
-                            City, Country
-                        </span>
-
+                    <h1 class="r-name" id="p-name">Your Name</h1>
+                    <p class="r-title" id="p-title">Your Professional Title</p>
+                    <div class="r-contact" id="p-contact">
+                        <span id="p-email">your@email.com</span>
+                        <span id="p-phone">+91 XXXXX XXXXX</span>
+                        <span id="p-location">City, Country</span>
+                        <span id="p-website" style="display:none"></span>
                     </div>
-
                 </div>
-
-
 
                 <!-- SUMMARY -->
-
-                <div class="resume-section">
-
-                    <h2>
-                        Profile
-                    </h2>
-
-                    <p>
-                        Your professional summary will
-                        appear here. Write a short
-                        introduction about yourself,
-                        your skills and your career goals.
-                    </p>
-
+                <div class="r-section" id="section-summary">
+                    <div class="r-section-title">Profile</div>
+                    <p id="p-summary" class="r-placeholder">Your professional summary will appear here. Write a short introduction about yourself, your skills and your career goals.</p>
                 </div>
-
-
 
                 <!-- EDUCATION -->
-
-                <div class="resume-section">
-
-                    <h2>
-                        Education
-                    </h2>
-
-
-                    <div class="resume-item">
-
-                        <h3>
-                            Bachelor of Computer Science
-                        </h3>
-
-                        <p class="company">
-                            Your College / University
-                        </p>
-
-                        <p class="date">
-                            2023 - 2026
-                        </p>
-
+                <div class="r-section" id="section-education">
+                    <div class="r-section-title">Education</div>
+                    <div id="p-education">
+                        <div class="r-item">
+                            <div class="r-item-header">
+                                <h3 class="r-placeholder">Degree / Course</h3>
+                                <span class="r-date r-placeholder">2022 — 2026</span>
+                            </div>
+                            <p class="r-sub r-placeholder">School / University</p>
+                        </div>
                     </div>
-
                 </div>
-
-
 
                 <!-- EXPERIENCE -->
-
-                <div class="resume-section">
-
-                    <h2>
-                        Experience
-                    </h2>
-
-
-                    <div class="resume-item">
-
-                        <h3>
-                            Job Title
-                        </h3>
-
-                        <p class="company">
-                            Company Name
-                        </p>
-
-                        <p class="date">
-                            2025 - Present
-                        </p>
-
-                        <p>
-                            Describe your work experience,
-                            responsibilities and achievements
-                            here.
-                        </p>
-
+                <div class="r-section" id="section-experience">
+                    <div class="r-section-title">Experience</div>
+                    <div id="p-experience">
+                        <div class="r-item">
+                            <div class="r-item-header">
+                                <h3 class="r-placeholder">Job Title</h3>
+                                <span class="r-date r-placeholder">2024 — Present</span>
+                            </div>
+                            <p class="r-sub r-placeholder">Company Name</p>
+                            <p class="r-desc r-placeholder">Describe your responsibilities and achievements here.</p>
+                        </div>
                     </div>
-
                 </div>
-
-
 
                 <!-- SKILLS -->
-
-                <div class="resume-section">
-
-                    <h2>
-                        Skills
-                    </h2>
-
-
-                    <div class="skills">
-
-                        <span class="skill">
-                            HTML
-                        </span>
-
-                        <span class="skill">
-                            CSS
-                        </span>
-
-                        <span class="skill">
-                            JavaScript
-                        </span>
-
-                        <span class="skill">
-                            Python
-                        </span>
-
-                        <span class="skill">
-                            SQL
-                        </span>
-
+                <div class="r-section" id="section-skills">
+                    <div class="r-section-title">Skills</div>
+                    <div class="r-skills" id="p-skills">
+                        <span class="r-skill r-placeholder">HTML</span>
+                        <span class="r-skill r-placeholder">CSS</span>
+                        <span class="r-skill r-placeholder">JavaScript</span>
                     </div>
-
                 </div>
-
-
 
                 <!-- PROJECTS -->
-
-                <div class="resume-section">
-
-                    <h2>
-                        Projects
-                    </h2>
-
-
-                    <div class="project-item">
-
-                        <h3>
-                            Resume Builder
-                        </h3>
-
-                        <p>
-                            A web application that helps
-                            users create professional resumes
-                            easily.
-                        </p>
-
+                <div class="r-section" id="section-projects">
+                    <div class="r-section-title">Projects</div>
+                    <div id="p-projects">
+                        <div class="r-item">
+                            <div class="r-item-header">
+                                <h3 class="r-placeholder">Project Name</h3>
+                            </div>
+                            <p class="r-desc r-placeholder">Project description will appear here.</p>
+                        </div>
                     </div>
-
                 </div>
 
-
             </div>
-
         </section>
 
     </main>
 
-</body>
 
+    <script>
+    /* =============================================
+       RESUMEIT — RESUME FORM LOGIC
+       Live preview, dynamic entries, auto-save/load
+    ============================================= */
+
+    /* ---------- DATA MODEL ---------- */
+    var data = {
+        name: '', title: '', email: '', phone: '', location: '', website: '',
+        summary: '',
+        skills: '',
+        education: [{ degree: '', school: '', start: '', end: '' }],
+        experience: [{ title: '', company: '', start: '', end: '', desc: '' }],
+        projects: [{ name: '', tech: '', desc: '' }]
+    };
+
+    /* ---------- FIELD UPDATE ---------- */
+    function updateField(key, value) {
+        data[key] = value;
+        renderPreview();
+        scheduleSave();
+    }
+
+    /* ---------- ENTRY UPDATE ---------- */
+    function updateEntry(section, index, key, value) {
+        data[section][index][key] = value;
+        renderPreview();
+        scheduleSave();
+    }
+
+    /* ---------- ADD / REMOVE ENTRIES ---------- */
+    function addEntry(section) {
+        if (section === 'education') {
+            data.education.push({ degree: '', school: '', start: '', end: '' });
+            renderEducationForm();
+        } else if (section === 'experience') {
+            data.experience.push({ title: '', company: '', start: '', end: '', desc: '' });
+            renderExperienceForm();
+        } else if (section === 'projects') {
+            data.projects.push({ name: '', tech: '', desc: '' });
+            renderProjectsForm();
+        }
+        renderPreview();
+        scheduleSave();
+    }
+
+    function removeEntry(section, index) {
+        data[section].splice(index, 1);
+        if (section === 'education') renderEducationForm();
+        else if (section === 'experience') renderExperienceForm();
+        else if (section === 'projects') renderProjectsForm();
+        renderPreview();
+        scheduleSave();
+    }
+
+    /* ---------- RENDER FORM SECTIONS ---------- */
+    function renderEducationForm() {
+        var c = document.getElementById('edu-entries');
+        c.innerHTML = data.education.map(function(edu, i) {
+            return '<div class="entry-block">' +
+                '<div class="entry-block-header">' +
+                    '<span class="entry-label">Education #' + (i + 1) + '</span>' +
+                    (data.education.length > 1 ? '<button class="remove-btn" onclick="removeEntry(\'education\', ' + i + ')">Remove</button>' : '') +
+                '</div>' +
+                '<div class="form-row">' +
+                    '<div class="input-group"><label>Degree / Course</label>' +
+                        '<input type="text" placeholder="Bachelor of Computer Science" value="' + esc(edu.degree) + '" oninput="updateEntry(\'education\',' + i + ',\'degree\',this.value)">' +
+                    '</div>' +
+                    '<div class="input-group"><label>School / University</label>' +
+                        '<input type="text" placeholder="University name" value="' + esc(edu.school) + '" oninput="updateEntry(\'education\',' + i + ',\'school\',this.value)">' +
+                    '</div>' +
+                '</div>' +
+                '<div class="form-row">' +
+                    '<div class="input-group"><label>Start Year</label>' +
+                        '<input type="text" placeholder="2022" value="' + esc(edu.start) + '" oninput="updateEntry(\'education\',' + i + ',\'start\',this.value)">' +
+                    '</div>' +
+                    '<div class="input-group"><label>End Year</label>' +
+                        '<input type="text" placeholder="2026 / Present" value="' + esc(edu.end) + '" oninput="updateEntry(\'education\',' + i + ',\'end\',this.value)">' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        }).join('');
+    }
+
+    function renderExperienceForm() {
+        var c = document.getElementById('exp-entries');
+        c.innerHTML = data.experience.map(function(exp, i) {
+            return '<div class="entry-block">' +
+                '<div class="entry-block-header">' +
+                    '<span class="entry-label">Experience #' + (i + 1) + '</span>' +
+                    (data.experience.length > 1 ? '<button class="remove-btn" onclick="removeEntry(\'experience\', ' + i + ')">Remove</button>' : '') +
+                '</div>' +
+                '<div class="form-row">' +
+                    '<div class="input-group"><label>Job Title</label>' +
+                        '<input type="text" placeholder="e.g. Software Developer" value="' + esc(exp.title) + '" oninput="updateEntry(\'experience\',' + i + ',\'title\',this.value)">' +
+                    '</div>' +
+                    '<div class="input-group"><label>Company</label>' +
+                        '<input type="text" placeholder="Company name" value="' + esc(exp.company) + '" oninput="updateEntry(\'experience\',' + i + ',\'company\',this.value)">' +
+                    '</div>' +
+                '</div>' +
+                '<div class="form-row">' +
+                    '<div class="input-group"><label>Start</label>' +
+                        '<input type="text" placeholder="Jan 2024" value="' + esc(exp.start) + '" oninput="updateEntry(\'experience\',' + i + ',\'start\',this.value)">' +
+                    '</div>' +
+                    '<div class="input-group"><label>End</label>' +
+                        '<input type="text" placeholder="Present" value="' + esc(exp.end) + '" oninput="updateEntry(\'experience\',' + i + ',\'end\',this.value)">' +
+                    '</div>' +
+                '</div>' +
+                '<div class="input-group"><label>Description</label>' +
+                    '<textarea placeholder="Describe your responsibilities and key achievements..." oninput="updateEntry(\'experience\',' + i + ',\'desc\',this.value)">' + esc(exp.desc) + '</textarea>' +
+                '</div>' +
+            '</div>';
+        }).join('');
+    }
+
+    function renderProjectsForm() {
+        var c = document.getElementById('proj-entries');
+        c.innerHTML = data.projects.map(function(proj, i) {
+            return '<div class="entry-block">' +
+                '<div class="entry-block-header">' +
+                    '<span class="entry-label">Project #' + (i + 1) + '</span>' +
+                    (data.projects.length > 1 ? '<button class="remove-btn" onclick="removeEntry(\'projects\', ' + i + ')">Remove</button>' : '') +
+                '</div>' +
+                '<div class="form-row">' +
+                    '<div class="input-group"><label>Project Name</label>' +
+                        '<input type="text" placeholder="My Awesome Project" value="' + esc(proj.name) + '" oninput="updateEntry(\'projects\',' + i + ',\'name\',this.value)">' +
+                    '</div>' +
+                    '<div class="input-group"><label>Technologies</label>' +
+                        '<input type="text" placeholder="React, Node.js, MongoDB" value="' + esc(proj.tech) + '" oninput="updateEntry(\'projects\',' + i + ',\'tech\',this.value)">' +
+                    '</div>' +
+                '</div>' +
+                '<div class="input-group"><label>Description</label>' +
+                    '<textarea placeholder="What does this project do? What did you build?" oninput="updateEntry(\'projects\',' + i + ',\'desc\',this.value)">' + esc(proj.desc) + '</textarea>' +
+                '</div>' +
+            '</div>';
+        }).join('');
+    }
+
+    /* ---------- RENDER PREVIEW ---------- */
+    function renderPreview() {
+        /* Personal */
+        setText('p-name', data.name, 'Your Name');
+        setText('p-title', data.title, 'Your Professional Title');
+        setText('p-email', data.email, 'your@email.com');
+        setText('p-phone', data.phone, '+91 XXXXX XXXXX');
+        setText('p-location', data.location, 'City, Country');
+
+        var webEl = document.getElementById('p-website');
+        if (data.website.trim()) {
+            webEl.textContent = data.website;
+            webEl.style.display = '';
+        } else {
+            webEl.style.display = 'none';
+        }
+
+        /* Summary */
+        setText('p-summary', data.summary, 'Your professional summary will appear here. Write a short introduction about yourself, your skills and your career goals.');
+
+        /* Education */
+        var eduHtml = data.education.map(function(e) {
+            var hasData = e.degree || e.school || e.start || e.end;
+            var dateStr = (e.start || '') + (e.end ? ' — ' + e.end : '');
+            return '<div class="r-item">' +
+                '<div class="r-item-header">' +
+                    '<h3 class="' + (e.degree ? '' : 'r-placeholder') + '">' + (escHtml(e.degree) || 'Degree / Course') + '</h3>' +
+                    (dateStr ? '<span class="r-date">' + escHtml(dateStr) + '</span>' : '<span class="r-date r-placeholder">2022 — 2026</span>') +
+                '</div>' +
+                '<p class="r-sub ' + (e.school ? '' : 'r-placeholder') + '">' + (escHtml(e.school) || 'School / University') + '</p>' +
+            '</div>';
+        }).join('');
+        document.getElementById('p-education').innerHTML = eduHtml;
+
+        /* Experience */
+        var expHtml = data.experience.map(function(e) {
+            var dateStr = (e.start || '') + (e.end ? ' — ' + e.end : '');
+            return '<div class="r-item">' +
+                '<div class="r-item-header">' +
+                    '<h3 class="' + (e.title ? '' : 'r-placeholder') + '">' + (escHtml(e.title) || 'Job Title') + '</h3>' +
+                    (dateStr ? '<span class="r-date">' + escHtml(dateStr) + '</span>' : '<span class="r-date r-placeholder">2024 — Present</span>') +
+                '</div>' +
+                '<p class="r-sub ' + (e.company ? '' : 'r-placeholder') + '">' + (escHtml(e.company) || 'Company Name') + '</p>' +
+                '<p class="r-desc ' + (e.desc ? '' : 'r-placeholder') + '">' + (nl2br(e.desc) || 'Describe your responsibilities and achievements here.') + '</p>' +
+            '</div>';
+        }).join('');
+        document.getElementById('p-experience').innerHTML = expHtml;
+
+        /* Skills */
+        var skillsEl = document.getElementById('p-skills');
+        var rawSkills = data.skills.trim();
+        if (rawSkills) {
+            var skillTags = rawSkills.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+            skillsEl.innerHTML = skillTags.map(function(s) {
+                return '<span class="r-skill">' + escHtml(s) + '</span>';
+            }).join('');
+        } else {
+            skillsEl.innerHTML = '<span class="r-skill r-placeholder">HTML</span><span class="r-skill r-placeholder">CSS</span><span class="r-skill r-placeholder">JavaScript</span>';
+        }
+
+        /* Projects */
+        var projHtml = data.projects.map(function(p) {
+            var techStr = p.tech ? ' <span style="color:#888;font-size:9px;font-weight:400;">| ' + escHtml(p.tech) + '</span>' : '';
+            return '<div class="r-item">' +
+                '<div class="r-item-header">' +
+                    '<h3 class="' + (p.name ? '' : 'r-placeholder') + '">' + (escHtml(p.name) || 'Project Name') + techStr + '</h3>' +
+                '</div>' +
+                '<p class="r-desc ' + (p.desc ? '' : 'r-placeholder') + '">' + (nl2br(p.desc) || 'Project description will appear here.') + '</p>' +
+            '</div>';
+        }).join('');
+        document.getElementById('p-projects').innerHTML = projHtml;
+    }
+
+    /* ---------- HELPERS ---------- */
+    function setText(id, value, placeholder) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        if (value && value.trim()) {
+            el.textContent = value;
+            el.classList.remove('r-placeholder');
+        } else {
+            el.textContent = placeholder;
+            el.classList.add('r-placeholder');
+        }
+    }
+    function esc(str) {
+        return (str || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+    function escHtml(str) {
+        return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+    function nl2br(str) {
+        return escHtml(str || '').replace(/\n/g, '<br>');
+    }
+
+    /* ---------- TABS ---------- */
+    function switchTab(name) {
+        document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+        document.querySelectorAll('.form-tab').forEach(function(b) { b.classList.remove('active'); });
+        var targetPanel = document.getElementById('tab-' + name);
+        if (targetPanel) targetPanel.classList.add('active');
+        var tabs = document.querySelectorAll('.form-tab');
+        var map = { personal: 0, education: 1, skills: 2, experience: 3, projects: 4 };
+        if (tabs[map[name]]) tabs[map[name]].classList.add('active');
+    }
+
+    /* ---------- SAVE / LOAD ---------- */
+    var saveTimer = null;
+    function scheduleSave() {
+        clearTimeout(saveTimer);
+        var status = document.getElementById('saveStatus');
+        if (status) { status.textContent = 'Saving...'; status.className = 'save-status'; }
+        saveTimer = setTimeout(function() { autoSave(); }, 800);
+    }
+    function autoSave() {
+        localStorage.setItem('resumeit-data', JSON.stringify(data));
+        var status = document.getElementById('saveStatus');
+        if (status) { status.textContent = 'Auto-saved ✓'; status.className = 'save-status saved'; }
+    }
+    function saveResume() {
+        localStorage.setItem('resumeit-data', JSON.stringify(data));
+        var status = document.getElementById('saveStatus');
+        if (status) { status.textContent = 'Saved ✓'; status.className = 'save-status saved'; }
+    }
+    function loadFromStorage() {
+        var saved = localStorage.getItem('resumeit-data');
+        if (!saved) return;
+        try {
+            var parsed = JSON.parse(saved);
+            data = Object.assign(data, parsed);
+            setVal('f-name', data.name);
+            setVal('f-title', data.title);
+            setVal('f-email', data.email);
+            setVal('f-phone', data.phone);
+            setVal('f-location', data.location);
+            setVal('f-website', data.website);
+            setVal('f-summary', data.summary);
+            setVal('f-skills', data.skills);
+        } catch(e) {}
+    }
+    function setVal(id, value) {
+        var el = document.getElementById(id);
+        if (el && value) el.value = value;
+    }
+
+    /* ---------- DOWNLOAD ---------- */
+    function downloadPDF() { window.print(); }
+
+    /* ---------- THEME ---------- */
+    (function(){
+        var s = localStorage.getItem('resumeit-theme');
+        if (s === 'light') document.documentElement.setAttribute('data-theme','light');
+        function syncIcons() {
+            var light = document.documentElement.getAttribute('data-theme') === 'light';
+            document.querySelectorAll('.theme-btn').forEach(function(b){
+                b.textContent = light ? '☀️' : '🌙';
+                b.title = light ? 'Switch to dark mode' : 'Switch to light mode';
+            });
+        }
+        window.toggleTheme = function() {
+            var light = document.documentElement.getAttribute('data-theme') === 'light';
+            if (light) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('resumeit-theme','dark'); }
+            else { document.documentElement.setAttribute('data-theme','light'); localStorage.setItem('resumeit-theme','light'); }
+            syncIcons();
+        };
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncIcons);
+        else syncIcons();
+    })();
+
+    /* ---------- INIT ---------- */
+    document.addEventListener('DOMContentLoaded', function() {
+        loadFromStorage();
+        renderEducationForm();
+        renderExperienceForm();
+        renderProjectsForm();
+        renderPreview();
+    });
+
+    </script>
+
+</body>
 </html>
